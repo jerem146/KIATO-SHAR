@@ -125,13 +125,13 @@ npm start
 
 ### **`❀ Colaboradores`**
 <a href="https://github.com/htpps0J/Yuki_Suou-Bot/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=The-King-Destroy/Yuki_Suou-Bot" /> 
+<img src="https://contrib.rocks/image?repo=https0J/Yuki_Suou-Bot" /> 
 </a>
 
 ### **`ᥫ᭡ Propietario`**
 <a
-href="https://github.com/htpps0J"><img src="https://github.com/htpps0J.png" width="130" height="130" alt="
-ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜"/></a>
+href="https://github.com/https0J"><img src="https://github.com/https0J.png" width="130" height="130" alt="
+https0J"/></a>
 
 ### **`🜸 Créditos`**
 <a

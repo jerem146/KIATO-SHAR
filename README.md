@@ -1,6 +1,6 @@
 <h1 align="center">✦ Destiny-Bσƚ ✦</h1>
 
- <img src= "https://files.catbox.moe/om9jai.jpg">
+ <img src= "https://files.catbox.moe/ob1psq.jpg">
     </p>
 
 ### **`❕️ Información importante`**
@@ -97,7 +97,7 @@ npm start
 > Si después de instalar el bot en Termux y iniciar la session del bot (deseas poner tu número es la lista de owner pon este comando:
 
    ```bash
-    cd Yuki_Suou-Bot && nano settings.js
+    cd Destiny-Bot && nano settings.js
    ```
 
 </details>

@@ -27,9 +27,9 @@ return res.data
 console.log(`Error : ${e}`)
 }}
   
-global.creador = 'Wa.me/528211111111'
+global.creador = 'Wa.me/573154062343'
 global.ofcbot = `${conn.user.jid.split('@')[0]}`
-global.asistencia = 'Wa.me/528211111111'
+global.asistencia = 'Wa.me/573154062343'
 global.namechannel = '=͟͟͞❀ 𝐘𝐮𝐤𝐢 𝐒𝐮𝐨𝐮 - 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⏤͟͟͞͞★'
 global.namechannel2 = '=͟͟͞❀ 𝐘𝐮𝐤𝐢 𝐒𝐮𝐨𝐮 - 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⏤͟͟͞͞★'
 global.namegrupo = 'ᰔᩚ ᥡᥙkі sᥙ᥆ᥙ • ᥆𝖿іᥴіᥲᥣ ❀'
@@ -68,9 +68,9 @@ global.waitttt = '❍ Espera un momento, soy lenta...';
 
 var canal = 'https://whatsapp.com/channel/0029VbAfPu9BqbrEMFWXKE0d'  
 var comunidad = 'https://chat.whatsapp.com/I0dMp2fEle7L6RaWBmwlAa'
-var git = 'https://github.com/The-King-Destroy'
-var github = 'https://github.com/The-King-Destroy/Yuki_Suou-Bot' 
-let correo = 'thekingdestroy507@gmail.com'
+var git = 'https://github.com/https0J'
+var github = 'https://github.com/https0J/Destiny-Bot' 
+let correo = 'https0johan@gmail.com'
 global.redes = [canal, comunidad, git, github, correo].getRandom()
 
 let category = "imagen"

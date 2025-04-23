@@ -124,7 +124,7 @@ npm start
 ---
 
 ### **`❀ Colaboradores`**
-<a href="https://github.com/htpps0J/Yuki_Suou-Bot/graphs/contributors">
+<a href="https://github.com/https0J/Yuki_Suou-Bot/graphs/contributors">
 <img src="https://contrib.rocks/image?repo=https0J/Yuki_Suou-Bot" /> 
 </a>
 

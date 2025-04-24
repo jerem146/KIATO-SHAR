@@ -58,7 +58,7 @@ global.avatar = 'https://files.catbox.moe/pzn79l.jpg'
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.gp1 = 'https://chat.whatsapp.com/CDw7hpI30WjCyKFAVLHNhZ'
-global.comunidad1 = 'https://chat.whatsapp.com/I0dMp2fEle7L6RaWBmwlAa'
+global.comunidad1 = 'https://chat.whatsapp.com/Ekf7Ge36AthIUiCGIdRHR2'
 global.channel = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
 global.channel2 = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
 global.md = 'https://github.com/https0J/Destiny-Bot'

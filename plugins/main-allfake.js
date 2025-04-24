@@ -82,7 +82,7 @@ const response = await fetch(randomlink)
 const rimg = await resphttps://files.catbox.moe/xr2m6u.jpg')
 
 global.canalIdM = ["120363416409380841@newsletter", "120363416409380841@newsletter"]
-global.canalNombreM = ["ᰔᩚ Destiny-bot• Channel ❀", "ᰔᩚ Destin-bot• ᥲ᥎іs᥆s ❀"]
+global.canalNombreM = ["ᰔᩚ Destiny-bot• Updates ❀", "ᰔᩚ Destin-bot• ᥲ᥎іs᥆s ❀"]
 global.channelRD = await getRandomChannel()
 
 global.d = new Date(new Date + 3600000)

@@ -38,7 +38,7 @@ global.listo = '❀ *Aquí tienes ฅ^•ﻌ•^ฅ*'
 global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://files.catbox.moe/xr2m6u.jpg')
 
 global.canalIdM = ["120363416409380841@newsletter", "120363416409380841@newsletter"]
-global.canalNombreM = ["ᰔᩚ ᥡᥙkіᑲ᥆𝗍-mძ • ᥙ⍴ძᥲ𝗍ᥱs ❀", "ᰔᩚ ᥡᥙkіᑲ᥆𝗍-mძ • ᥲ᥎іs᥆s ❀"]
+global.canalNombreM = ["ᰔᩚ Destiny-bot • ᥙ⍴ძᥲ𝗍ᥱs ❀", "ᰔᩚ Destiny-bot• ᥲ᥎іs᥆s ❀"]
 global.channelRD = await getRandomChannel()
 
 global.d = new Date(new Date + 3600000)
@@ -66,8 +66,8 @@ global.waitt = '❍ Espera un momento, soy lenta...';
 global.waittt = '❍ Espera un momento, soy lenta...';
 global.waitttt = '❍ Espera un momento, soy lenta...';
 
-var canal = 'https://whatsapp.com/channel/0029VbAfPu9BqbrEMFWXKE0d'  
-var comunidad = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
+var canal = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'  
+var comunidad = 'https://chat.whatsapp.com/Ekf7Ge36AthIUiCGIdRHR2'
 var git = 'https://github.com/https0J'
 var github = 'https://github.com/https0J/Destiny-Bot' 
 let correo = 'https0johan@gmail.com'
@@ -79,7 +79,7 @@ const db_ = JSON.parse(fs.readFileSync(db))
 const random = Math.floor(Math.random() * db_.links[category].length)
 const randomlink = db_.links[category][random]
 const response = await fetch(randomlink)
-const rimg = await resphttps://files.catbox.moe/xr2m6u.jpg')
+const rimg = await resphttps://filss.catbox.moe/xr2m6u.jpg')
 
 global.canalIdM = ["120363416409380841@newsletter", "120363416409380841@newsletter"]
 global.canalNombreM = ["ᰔᩚ Destiny-bot• Updates ❀", "ᰔᩚ Destin-bot• ᥲ᥎іs᥆s ❀"]
@@ -111,7 +111,7 @@ global.waittt = '❍ Espera un momento, soy lenta...';
 global.waitttt = '❍ Espera un momento, soy lenta...';
 
 var canal = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'  
-var comunidad = 'https://chat.whatsapp.com/Ekf7Ge36AthIUiCGIdRHR2'
+var comunidad = 'https://chat.whatsapp.com/Ekf7Ge36AthIUiCGIdRH2'
 var git = 'https://github.com/https0J'
 var github = 'https://github.com/https0J/Destiny-Bot' 
 let correo = 'https0johan@gmail.com'

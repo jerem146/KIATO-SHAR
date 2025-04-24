@@ -63,7 +63,7 @@ destinyJBOptions.args = args
 destinyJBOptions.usedPrefix = usedPrefix
 destinyJBOptions.command = command
 destinyJBOptions.fromCommand = true
-destinyfJadiBot(destinyJBOptions)
+destinyJadiBot(destinyJBOptions)
 global.db.data.users[m.sender].Subs = new Date * 1
 } 
 handler.help = ['qr', 'code']

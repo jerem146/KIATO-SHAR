@@ -37,7 +37,7 @@ global.namecomu = 'ᰔᩚ Destiny • ᥴ᥆mᥙᥒі𝗍ᥡ ❀'
 global.listo = '❀ *Aquí tienes ฅ^•ﻌ•^ฅ*'
 global.fotoperfil = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://files.catbox.moe/xr2m6u.jpg')
 
-global.canalIdM = ["120363416409380841@newsletter", "120363416409380841@newsletter"]
+global.canalIdM = []
 global.canalNombreM = ["ᰔᩚ Destiny-bot • ᥙ⍴ძᥲ𝗍ᥱs ❀", "ᰔᩚ Destiny-bot• ᥲ᥎іs᥆s ❀"]
 global.channelRD = await getRandomChannel()
 

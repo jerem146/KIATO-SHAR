@@ -18,7 +18,6 @@ global.botNumber = '' //Ejemplo: 573218138672
 global.owner = [
   ['573154062343', ' Propietario ', true],
   ['5218211111111'],
-  ['529541690054']
 ];
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
@@ -32,20 +31,20 @@ global.prems = []
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.16' 
 global.vs = '1.0.0'
-global.nameqr = 'DestinyBot-MD'
-global.namebot = '✿◟Destiny-Bσƚ◞✿'
+global.nameqr = '𝐃𝐞𝐬𝐭𝐢𝐧𝐲𝐁𝐨𝐭-MD'
+global.namebot = '✿◟𝐃𝐞𝐬𝐭𝐢𝐧𝐲-Bσƚ◞✿'
 global.sessions = 'Sessions'
 global.jadi = 'JadiBots' 
 global.yukiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.packname = '⪛✰ Destiny-bot ✰⪜'
-global.botname = 'Destiny-bot'
-global.wm = 'ৎ୭࠭͢𝐘𝐮𝐤𝐢_𝐒𝐮𝐨𝐮-𝐁𝐨𝐭ⷭ𓆪͟͞ '
+global.packname = '⪛✰ 𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐛𝐨𝐭 ✰⪜'
+global.botname = '𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐛𝐨𝐭'
+global.wm = 'ৎ୭࠭͢𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐁𝐨𝐭ⷭ𓆪͟͞ '
 global.author = 'Made By https_(S2)'
 global.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ https_(S2)'
-global.textbot = 'Destiny-bot • Powered By https_(S2)'
+global.textbot = '𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐛𝐨𝐭 • Powered By https_(S2)'
 global.etiqueta = 'https_(S2)'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*

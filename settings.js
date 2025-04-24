@@ -63,7 +63,7 @@ global.channel = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
 global.channel2 = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
 global.md = 'https://github.com/https0J/Destiny-Bot'
 global.correo = 'https0johan@gmail.com'
-global.cn ='https://whatsapp.com/channel/0029VapSIvR5EjxsD1B7hU3T';
+global.cn ='https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n';
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 

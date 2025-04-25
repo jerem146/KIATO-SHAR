@@ -84,7 +84,7 @@ let handler = async (m, { conn }) => {
 
 handler.help = ['ver', 'rw', 'rollwaifu']
 handler.tags = ['gacha']
-handler.command = ['ver', 'rw', 'roll' 'rollwaifu']
+handler.command = ['ver', 'rw', 'roll', 'rollwaifu']
 handler.group = true
 
 export default handler

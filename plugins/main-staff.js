@@ -8,9 +8,9 @@ let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
 
 ❍ *Creador:*
 
-ᰔᩚ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜
+ᰔᩚ https_(S2)
 > 🜸 Rol » *Creador*
-> ✧ GitHub » https://github.com/The-King-Destroy
+> ✧ GitHub » https://github.com/https0J 
 
 ❒ *Colaboradores:*
 
@@ -18,18 +18,10 @@ let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
 > 🜸 Rol » *Developer*
 > ✧ GitHub » https://github.com/Elpapiema
 
-ᰔᩚ Niño Piña
+ᰔᩚ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜
 > 🜸 Rol » *Developer*
-> ✧ GitHub » https://github.com/WillZek
-
-✧ ☆꧁༒ĹєǤ𝒆𝐧𝐃༒꧂☆
-> 🜸 Rol » *Developer*
-> ✧ GitHub » https://github.com/Diomar-s
-
-ᰔᩚ I'm Fz' (Tesis)
-> 🜸 Rol » *Developer*
-> ✧ GitHub » https://github.com/FzTeis
-
+> ✧ GitHub » https://github.com/The-King-Destroy
+  
 ᰔᩚ Legna
 > 🜸 Rol » *Mini-Dev* 
 > ✧ GitHub » https://github.com/Legna-chan

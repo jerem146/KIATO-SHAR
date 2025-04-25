@@ -2,92 +2,161 @@ import fetch from "node-fetch";
 import yts from 'yt-search';
 import axios from "axios";
 
-const formatAudio = ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'];
-const formatVideo = ['360', '480', '720', '1080', '1440', '4k'];
+// Formatos soportados organizados mejor
+const supportedFormats = {
+  audio: ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'],
+  video: ['144', '240', '360', '480', '720', '1080', '1440', '2160'] // 2160 = 4K
+};
 
-const ddownr = {
-  download: async (url, format) => {
-    if (!formatAudio.includes(format) && !formatVideo.includes(format)) {
-      throw new Error('Formato no soportado, verifica la lista de formatos disponibles.');
+// Configuración de APIs alternativas
+const videoAPIs = [
+  `https://api.siputzx.my.id/api/d/ytmp4?url=`,
+  `https://api.zenkey.my.id/api/download/ytmp4?apikey=zenkey&url=`,
+  `https://axeel.my.id/api/download/video?url=`,
+  `https://delirius-apiofc.vercel.app/download/ytmp4?url=`
+];
+
+const audioAPIs = [
+  `https://api.siputzx.my.id/api/d/ytmp3?url=`,
+  `https://api.zenkey.my.id/api/download/ytmp3?apikey=zenkey&url=`,
+  `https://delirius-apiofc.vercel.app/download/ytmp3?url=`
+];
+
+class YouTubeDownloader {
+  static async downloadFromAPI(url, format) {
+    const isAudio = supportedFormats.audio.includes(format);
+    const isVideo = supportedFormats.video.includes(format);
+    
+    if (!isAudio && !isVideo) {
+      throw new Error(`Formato no soportado. Formatos disponibles:\nAudio: ${supportedFormats.audio.join(', ')}\nVideo: ${supportedFormats.video.join(', ')}`);
     }
-
-    const config = {
-      method: 'GET',
-      url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
-      }
-    };
 
     try {
+      const config = {
+        method: 'GET',
+        url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+      };
+
       const response = await axios.request(config);
 
-      if (response.data && response.data.success) {
+      if (response.data?.success) {
         const { id, title, info } = response.data;
-        const { image } = info;
-        const downloadUrl = await ddownr.cekProgress(id);
-
+        const downloadUrl = await this.checkProgress(id);
+        
         return {
-          id: id,
-          image: image,
-          title: title,
-          downloadUrl: downloadUrl
+          id,
+          title,
+          thumbnail: info?.image,
+          downloadUrl,
+          format: isAudio ? 'audio' : 'video'
         };
-      } else {
-        throw new Error('Fallo al obtener los detalles del video.');
       }
+      throw new Error('La API no devolvió datos válidos');
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error en downloadFromAPI:', error.message);
       throw error;
     }
-  },
-  cekProgress: async (id) => {
+  }
+
+  static async checkProgress(id) {
     const config = {
       method: 'GET',
       url: `https://p.oceansaver.in/ajax/progress.php?id=${id}`,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
     };
 
     try {
-      while (true) {
+      let attempts = 0;
+      const maxAttempts = 10; // Máximo 10 intentos (50 segundos)
+      
+      while (attempts < maxAttempts) {
+        attempts++;
         const response = await axios.request(config);
 
-        if (response.data && response.data.success && response.data.progress === 1000) {
-          return response.data.download_url;
+        if (response.data?.success) {
+          if (response.data.progress === 1000) {
+            return response.data.download_url;
+          }
+          if (response.data.error) {
+            throw new Error(response.data.error);
+          }
         }
         await new Promise(resolve => setTimeout(resolve, 5000));
       }
+      throw new Error('Tiempo de espera agotado para la descarga');
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error en checkProgress:', error.message);
       throw error;
     }
   }
-};
+
+  static async tryAlternativeAPIs(url, type = 'video') {
+    const apis = type === 'video' ? videoAPIs : audioAPIs;
+    
+    for (const api of apis) {
+      try {
+        const apiUrl = api + encodeURIComponent(url);
+        const res = await fetch(apiUrl);
+        
+        if (!res.ok) throw new Error(`API ${api} no respondió correctamente`);
+        
+        const data = await res.json();
+        const downloadUrl = data?.dl || data?.result?.download?.url || 
+                           data?.downloads?.url || data?.download?.url;
+        
+        if (downloadUrl) {
+          return {
+            downloadUrl,
+            source: api,
+            type
+          };
+        }
+      } catch (e) {
+        console.error(`Error con API ${api}:`, e.message);
+      }
+    }
+    throw new Error(`No se pudo descargar el ${type} desde ninguna API alternativa`);
+  }
+}
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `┌─⟢ *DESCARGA DE MÚSICA* ⟣─┐
+      return conn.reply(m.chat, `
+┌─⟢ *DESCARGA DE MÚSICA/VIDEO* ⟣─┐
 │
-│ ✦ Ingresa el nombre de la música a descargar.
+│ ✦ Uso: ${usedPrefix + command} <nombre o URL>
+│ ✦ Ejemplo: ${usedPrefix + command} Believer Imagine Dragons
 │
 └────────────────────┘`, m);
     }
 
+    // Buscar en YouTube
     const search = await yts(text);
-    if (!search.all || search.all.length === 0) {
+    if (!search.all?.length) {
       return m.reply('No se encontraron resultados para tu búsqueda.');
     }
 
-    const videoInfo = search.all[0];
-    const { title, thumbnail, timestamp, views, ago, url } = videoInfo;
-    const vistas = formatViews(views);
-    const infoMessage = `「✦」Descargando *<${title}>*\n\n> ✦ Canal » *${videoInfo.author.name || 'Desconocido'}*\n> ✰ Vistas » *${views}*\n> ⴵ Duración » *${timestamp}*\n> ✐ Publicación » *${ago}*\n> 🜸 Link » ${url}\n`;
-    const thumb = (await conn.getFile(thumbnail))?.data;
+    const video = search.all[0];
+    const { title, thumbnail, timestamp, views, ago, url, author } = video;
+    
+    // Información del video
+    const infoMsg = `「✦」 Descargando: *${title}*\n\n` +
+                   `> ✦ Canal: *${author?.name || 'Desconocido'}*\n` +
+                   `> ✰ Vistas: *${formatViews(views)}*\n` +
+                   `> ⴵ Duración: *${timestamp}*\n` +
+                   `> ✐ Publicado: *${ago}*\n` +
+                   `> 🜸 URL: ${url}`;
 
-    const JT = {
+    const thumb = (await conn.getFile(thumbnail))?.data;
+    
+    // Enviar información del video
+    await conn.reply(m.chat, infoMsg, m, {
       contextInfo: {
         externalAdReply: {
           title: packname,
@@ -100,74 +169,88 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           renderLargerThumbnail: true,
         },
       },
-    };
+    });
 
-    await conn.reply(m.chat, infoMessage, m, JT);
-
-    // Solo funciona con .play5
+    // Procesar descarga según el comando
     if (command === 'play5') {
-      // Primero intenta descargar como audio (mp3)
       try {
-        const api = await ddownr.download(url, 'mp3');
-        const result = api.downloadUrl;
-        await conn.sendMessage(m.chat, { audio: { url: result }, mimetype: "audio/mpeg" }, { quoted: m });
-        return;
+        // Intentar primero con la API principal
+        const result = await YouTubeDownloader.downloadFromAPI(url, 'mp3');
+        await conn.sendMessage(m.chat, {
+          audio: { url: result.downloadUrl },
+          mimetype: "audio/mpeg",
+          contextInfo: {
+            externalAdReply: {
+              title: title,
+              body: author?.name || '',
+              thumbnail: thumb,
+              mediaType: 2,
+              mediaUrl: url,
+              sourceUrl: url
+            }
+          }
+        }, { quoted: m });
       } catch (audioError) {
-        console.error('Error al descargar audio:', audioError);
-      }
-
-      // Si falla el audio, intenta descargar como video
-      let sources = [
-        `https://api.siputzx.my.id/api/d/ytmp4?url=${url}`,
-        `https://api.zenkey.my.id/api/download/ytmp4?apikey=zenkey&url=${url}`,
-        `https://axeel.my.id/api/download/video?url=${encodeURIComponent(url)}`,
-        `https://delirius-apiofc.vercel.app/download/ytmp4?url=${url}`
-      ];
-
-      let success = false;
-      for (let source of sources) {
+        console.error('Error con API principal, probando alternativas:', audioError.message);
+        
+        // Intentar con APIs alternativas para audio
         try {
-          const res = await fetch(source);
-          const { data, result, downloads } = await res.json();
-          let downloadUrl = data?.dl || result?.download?.url || downloads?.url || data?.download?.url;
-
-          if (downloadUrl) {
-            success = true;
+          const audioResult = await YouTubeDownloader.tryAlternativeAPIs(url, 'audio');
+          await conn.sendMessage(m.chat, {
+            audio: { url: audioResult.downloadUrl },
+            mimetype: "audio/mpeg",
+            fileName: `${title}.mp3`,
+            contextInfo: {
+              externalAdReply: {
+                title: title,
+                body: author?.name || '',
+                thumbnail: thumb,
+                mediaType: 2,
+                mediaUrl: url,
+                sourceUrl: url
+              }
+            }
+          }, { quoted: m });
+        } catch (altAudioError) {
+          console.error('Error con APIs de audio alternativas:', altAudioError.message);
+          
+          // Si falla el audio, intentar con video
+          try {
+            const videoResult = await YouTubeDownloader.tryAlternativeAPIs(url, 'video');
             await conn.sendMessage(m.chat, {
-              video: { url: downloadUrl },
+              video: { url: videoResult.downloadUrl },
               fileName: `${title}.mp4`,
               mimetype: 'video/mp4',
-              caption: ``,
+              caption: `*${title}* - ${author?.name || ''}`,
               thumbnail: thumb
             }, { quoted: m });
-            break;
+          } catch (videoError) {
+            console.error('Error al descargar video:', videoError.message);
+            throw new Error('No se pudo descargar el contenido como audio ni como video.');
           }
-        } catch (e) {
-          console.error(`Error con la fuente ${source}:`, e.message);
         }
       }
-
-      if (!success) {
-        return m.reply(` ✱ *No se pudo descargar el contenido:* No se encontró un enlace de descarga válido.`);
-      }
     } else {
-      throw "Comando no reconocido.";
+      throw new Error(`Comando no reconocido: ${command}`);
     }
   } catch (error) {
+    console.error('Error en handler:', error);
     return m.reply(`𓁏 *Error:* ${error.message}`);
   }
 };
 
-// Solo responde a .play5
-handler.command = handler.help = ['play5']; 
+// Comandos soportados
+handler.command = handler.help = ['play5', 'ytmp']; 
 handler.tags = ['downloader'];
 
 export default handler;
 
+// Función para formatear las vistas
 function formatViews(views) {
-  if (views >= 1000) {
-    return (views / 1000).toFixed(1) + 'k (' + views.toLocaleString() + ')';
-  } else {
-    return views.toString();
+  if (views >= 1000000) {
+    return (views / 1000000).toFixed(1) + 'M';
+  } else if (views >= 1000) {
+    return (views / 1000).toFixed(1) + 'K';
   }
+  return views.toString();
 }

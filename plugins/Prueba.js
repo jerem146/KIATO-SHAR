@@ -2,161 +2,92 @@ import fetch from "node-fetch";
 import yts from 'yt-search';
 import axios from "axios";
 
-// Formatos soportados organizados mejor
-const supportedFormats = {
-  audio: ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'],
-  video: ['144', '240', '360', '480', '720', '1080', '1440', '2160'] // 2160 = 4K
-};
+const formatAudio = ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'];
+const formatVideo = ['360', '480', '720', '1080', '1440', '4k'];
 
-// Configuración de APIs alternativas
-const videoAPIs = [
-  `https://api.siputzx.my.id/api/d/ytmp4?url=`,
-  `https://api.zenkey.my.id/api/download/ytmp4?apikey=zenkey&url=`,
-  `https://axeel.my.id/api/download/video?url=`,
-  `https://delirius-apiofc.vercel.app/download/ytmp4?url=`
-];
-
-const audioAPIs = [
-  `https://api.siputzx.my.id/api/d/ytmp3?url=`,
-  `https://api.zenkey.my.id/api/download/ytmp3?apikey=zenkey&url=`,
-  `https://delirius-apiofc.vercel.app/download/ytmp3?url=`
-];
-
-class YouTubeDownloader {
-  static async downloadFromAPI(url, format) {
-    const isAudio = supportedFormats.audio.includes(format);
-    const isVideo = supportedFormats.video.includes(format);
-    
-    if (!isAudio && !isVideo) {
-      throw new Error(`Formato no soportado. Formatos disponibles:\nAudio: ${supportedFormats.audio.join(', ')}\nVideo: ${supportedFormats.video.join(', ')}`);
+const ddownr = {
+  download: async (url, format) => {
+    if (!formatAudio.includes(format) && !formatVideo.includes(format)) {
+      throw new Error('Formato no soportado, verifica la lista de formatos disponibles.');
     }
 
-    try {
-      const config = {
-        method: 'GET',
-        url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-      };
-
-      const response = await axios.request(config);
-
-      if (response.data?.success) {
-        const { id, title, info } = response.data;
-        const downloadUrl = await this.checkProgress(id);
-        
-        return {
-          id,
-          title,
-          thumbnail: info?.image,
-          downloadUrl,
-          format: isAudio ? 'audio' : 'video'
-        };
-      }
-      throw new Error('La API no devolvió datos válidos');
-    } catch (error) {
-      console.error('Error en downloadFromAPI:', error.message);
-      throw error;
-    }
-  }
-
-  static async checkProgress(id) {
     const config = {
       method: 'GET',
-      url: `https://p.oceansaver.in/ajax/progress.php?id=${id}`,
+      url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
     };
 
     try {
-      let attempts = 0;
-      const maxAttempts = 10; // Máximo 10 intentos (50 segundos)
-      
-      while (attempts < maxAttempts) {
-        attempts++;
+      const response = await axios.request(config);
+
+      if (response.data && response.data.success) {
+        const { id, title, info } = response.data;
+        const { image } = info;
+        const downloadUrl = await ddownr.cekProgress(id);
+
+        return {
+          id: id,
+          image: image,
+          title: title,
+          downloadUrl: downloadUrl
+        };
+      } else {
+        throw new Error('Fallo al obtener los detalles del video.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  },
+  cekProgress: async (id) => {
+    const config = {
+      method: 'GET',
+      url: `https://p.oceansaver.in/ajax/progress.php?id=${id}`,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, como Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      }
+    };
+
+    try {
+      while (true) {
         const response = await axios.request(config);
 
-        if (response.data?.success) {
-          if (response.data.progress === 1000) {
-            return response.data.download_url;
-          }
-          if (response.data.error) {
-            throw new Error(response.data.error);
-          }
+        if (response.data && response.data.success && response.data.progress === 1000) {
+          return response.data.download_url;
         }
         await new Promise(resolve => setTimeout(resolve, 5000));
       }
-      throw new Error('Tiempo de espera agotado para la descarga');
     } catch (error) {
-      console.error('Error en checkProgress:', error.message);
+      console.error('Error:', error);
       throw error;
     }
   }
-
-  static async tryAlternativeAPIs(url, type = 'video') {
-    const apis = type === 'video' ? videoAPIs : audioAPIs;
-    
-    for (const api of apis) {
-      try {
-        const apiUrl = api + encodeURIComponent(url);
-        const res = await fetch(apiUrl);
-        
-        if (!res.ok) throw new Error(`API ${api} no respondió correctamente`);
-        
-        const data = await res.json();
-        const downloadUrl = data?.dl || data?.result?.download?.url || 
-                           data?.downloads?.url || data?.download?.url;
-        
-        if (downloadUrl) {
-          return {
-            downloadUrl,
-            source: api,
-            type
-          };
-        }
-      } catch (e) {
-        console.error(`Error con API ${api}:`, e.message);
-      }
-    }
-    throw new Error(`No se pudo descargar el ${type} desde ninguna API alternativa`);
-  }
-}
+};
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `
-┌─⟢ *DESCARGA DE MÚSICA/VIDEO* ⟣─┐
+      return conn.reply(m.chat, `┌─⟢ *DESCARGA DE MÚSICA* ⟣─┐
 │
-│ ✦ Uso: ${usedPrefix + command} <nombre o URL>
-│ ✦ Ejemplo: ${usedPrefix + command} Believer Imagine Dragons
+│ ✦ Ingresa el nombre de la música a descargar.
 │
 └────────────────────┘`, m);
     }
 
-    // Buscar en YouTube
     const search = await yts(text);
-    if (!search.all?.length) {
+    if (!search.all || search.all.length === 0) {
       return m.reply('No se encontraron resultados para tu búsqueda.');
     }
 
-    const video = search.all[0];
-    const { title, thumbnail, timestamp, views, ago, url, author } = video;
-    
-    // Información del video
-    const infoMsg = `「✦」 Descargando: *${title}*\n\n` +
-                   `> ✦ Canal: *${author?.name || 'Desconocido'}*\n` +
-                   `> ✰ Vistas: *${formatViews(views)}*\n` +
-                   `> ⴵ Duración: *${timestamp}*\n` +
-                   `> ✐ Publicado: *${ago}*\n` +
-                   `> 🜸 URL: ${url}`;
+    const videoInfo = search.all[0];
+    const { title, thumbnail, timestamp, views, ago, url } = videoInfo;
+    const vistas = formatViews(views);
+    const infoMessage = `「✦」Descargando *<${title}>*\n\n> ✦ Canal » *${videoInfo.author.name || 'Desconocido'}*\n> ✰ Vistas » *${views}*\n> ⴵ Duración » *${timestamp}*\n> ✐ Publicación » *${ago}*\n> 🜸 Link » ${url}\n`;
+       const thumb = (await conn.getFile(thumbnail))?.data;
 
-    const thumb = (await conn.getFile(thumbnail))?.data;
-    
-    // Enviar información del video
-    await conn.reply(m.chat, infoMsg, m, {
+    const JT = {
       contextInfo: {
         externalAdReply: {
           title: packname,
@@ -169,88 +100,66 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           renderLargerThumbnail: true,
         },
       },
-    });
+    };
 
-    // Procesar descarga según el comando
-    if (command === 'play5') {
-      try {
-        // Intentar primero con la API principal
-        const result = await YouTubeDownloader.downloadFromAPI(url, 'mp3');
-        await conn.sendMessage(m.chat, {
-          audio: { url: result.downloadUrl },
-          mimetype: "audio/mpeg",
-          contextInfo: {
-            externalAdReply: {
-              title: title,
-              body: author?.name || '',
-              thumbnail: thumb,
-              mediaType: 2,
-              mediaUrl: url,
-              sourceUrl: url
-            }
-          }
-        }, { quoted: m });
-      } catch (audioError) {
-        console.error('Error con API principal, probando alternativas:', audioError.message);
-        
-        // Intentar con APIs alternativas para audio
+      await conn.reply(m.chat, infoMessage, m, JT);
+
+    if (command === 'play' || command === 'yta' || command === 'mp3') {
+        const api = await ddownr.download(url, 'mp3');
+        const result = api.downloadUrl;
+        await conn.sendMessage(m.chat, { audio: { url: result }, mimetype: "audio/mpeg" }, { quoted: m });
+
+    } else if (command === 'play5' || command === 'ytv' || command === 'mp4') {
+      let sources = [
+        `https://api.siputzx.my.id/api/d/ytmp4?url=${url}`,
+        `https://api.zenkey.my.id/api/download/ytmp4?apikey=zenkey&url=${url}`,
+        `https://axeel.my.id/api/download/video?url=${encodeURIComponent(url)}`,
+        `https://delirius-apiofc.vercel.app/download/ytmp4?url=${url}`
+      ];
+
+      let success = false;
+      for (let source of sources) {
         try {
-          const audioResult = await YouTubeDownloader.tryAlternativeAPIs(url, 'audio');
-          await conn.sendMessage(m.chat, {
-            audio: { url: audioResult.downloadUrl },
-            mimetype: "audio/mpeg",
-            fileName: `${title}.mp3`,
-            contextInfo: {
-              externalAdReply: {
-                title: title,
-                body: author?.name || '',
-                thumbnail: thumb,
-                mediaType: 2,
-                mediaUrl: url,
-                sourceUrl: url
-              }
-            }
-          }, { quoted: m });
-        } catch (altAudioError) {
-          console.error('Error con APIs de audio alternativas:', altAudioError.message);
-          
-          // Si falla el audio, intentar con video
-          try {
-            const videoResult = await YouTubeDownloader.tryAlternativeAPIs(url, 'video');
+          const res = await fetch(source);
+          const { data, result, downloads } = await res.json();
+          let downloadUrl = data?.dl || result?.download?.url || downloads?.url || data?.download?.url;
+
+          if (downloadUrl) {
+            success = true;
             await conn.sendMessage(m.chat, {
-              video: { url: videoResult.downloadUrl },
+              video: { url: downloadUrl },
               fileName: `${title}.mp4`,
               mimetype: 'video/mp4',
-              caption: `*${title}* - ${author?.name || ''}`,
+              caption: ``,
               thumbnail: thumb
             }, { quoted: m });
-          } catch (videoError) {
-            console.error('Error al descargar video:', videoError.message);
-            throw new Error('No se pudo descargar el contenido como audio ni como video.');
+            break;
           }
+        } catch (e) {
+          console.error(`Error con la fuente ${source}:`, e.message);
         }
       }
+
+      if (!success) {
+        return m.reply(` ✱ *No se pudo descargar el video:* No se encontró un enlace de descarga válido.`);
+      }
     } else {
-      throw new Error(`Comando no reconocido: ${command}`);
+      throw "Comando no reconocido.";
     }
   } catch (error) {
-    console.error('Error en handler:', error);
     return m.reply(`𓁏 *Error:* ${error.message}`);
   }
 };
 
-// Comandos soportados
-handler.command = handler.help = ['play5', 'ytmp']; 
+handler.command = handler.help = ['play5', 'mp3', 'yta', 'mp4', 'ytv']; 
 handler.tags = ['downloader'];
 
 export default handler;
 
-// Función para formatear las vistas
 function formatViews(views) {
-  if (views >= 1000000) {
-    return (views / 1000000).toFixed(1) + 'M';
-  } else if (views >= 1000) {
-    return (views / 1000).toFixed(1) + 'K';
+  if (views >= 1000) {
+    return (views / 1000).toFixed(1) + 'k (' + views.toLocaleString() + ')';
+  } else {
+    return views.toString();
   }
-  return views.toString();
 }

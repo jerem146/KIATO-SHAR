@@ -21,6 +21,10 @@ let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
 ᰔᩚ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜
 > 🜸 Rol » *Developer*
 > ✧ GitHub » https://github.com/The-King-Destroy
+
+ᰔᩚ ⁱᵃᵐTwo ᥣ᥎1 rᥱmᥲs𝗍ᥱrіzᥲძo
+> 🜸 Rol » *Developer*
+> ✧ GitHub » https://github.com/twoLv3/TwoLv3
   
 ᰔᩚ Legna
 > 🜸 Rol » *Mini-Dev* 

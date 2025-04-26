@@ -17,7 +17,7 @@ let handler = async (m, { conn, text, args }) => {
       const results = await pins(text);
       if (!results.length) return conn.reply(m.chat, `No se encontraron resultados para "${text}".`, m);
 
-      const medias = results.slice(0, 10).map(img => ({ type: 'image', data: { url: img.image_large_url } }));
+      const medias = results.slice(0, 5).map(img => ({ type: 'image', data: { url: img.image_large_url } }));
 
       for (let media of medias) {
         await conn.sendMessage(m.chat, {

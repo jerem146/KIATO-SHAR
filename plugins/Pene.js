@@ -2,7 +2,7 @@
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 
 const handler = async (m, { conn, text, command }) => {
-  await conn.reply(m.chat, '¿Acaso escribiste *pene*🫦?', m);
+  await conn.reply(m.chat, '¿Acaso quieres *pene*?', m);
 };
 
 handler.command = handler.help = ['pene']

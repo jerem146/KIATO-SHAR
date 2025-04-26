@@ -2,10 +2,10 @@
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 
 const handler = async (m, { conn, text, command }) => {
-  await conn.reply(m.chat, '¿Acaso escribiste *girasol*🫦?', m);
+  await conn.reply(m.chat, '¿Acaso escribiste *pene*🫦?', m);
 };
 
-handler.command = handler.help = ['girasol']
+handler.command = handler.help = ['pene']
 handler.tags = ['fun']
 handler.group = true
 

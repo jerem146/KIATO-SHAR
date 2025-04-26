@@ -1,10 +1,13 @@
 import fs from 'fs'
 
 let handler = async (m, { conn }) => {
-  // Limpia el número del sender
-  const senderClean = m.sender.replace(/[^0-9]/g, '')
+  const thisBotNumber = conn.user.id.replace(/[^0-9]/g, '') // número del bot
 
-  // Verifica si el sender está en la lista de owners
+  if (thisBotNumber !== global.mainBotNumber) {
+    return m.reply('Este comando solo puede usarse desde el bot principal.')
+  }
+
+  const senderClean = m.sender.replace(/[^0-9]/g, '')
   const isOwner = global.owner.includes(senderClean)
 
   if (!isOwner) return m.reply('Este comando solo puede usarlo el owner del bot.')
@@ -12,7 +15,7 @@ let handler = async (m, { conn }) => {
 
   const data = { primaryGroup: m.chat }
   fs.writeFileSync('./config/primaryGroup.json', JSON.stringify(data, null, 2))
-  m.reply(`Grupo guardado correctamente como grupo principal:\n*${m.chat}*`)
+  m.reply(`Grupo guardado como principal:\n*${m.chat}*`)
 }
 
 handler.command = ['setprimary']

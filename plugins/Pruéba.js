@@ -21,8 +21,9 @@ const handler = async (m, { conn }) => {
   m.reply('✅ El grupo principal ha sido eliminado correctamente.')
 }
 
-handler.help = ['delprimary', 'unsetprimary']
+handler.command = handler.help = ['delprimary','unsetprimary']
 handler.tags = ['owner']
-handler.owner = true
+handler.group = true
+
 
 export default handler

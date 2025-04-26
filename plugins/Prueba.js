@@ -26,7 +26,6 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
 
 handler.help = ['setprimary']
 handler.tags = ['owner']
-handler.command = /^setprimary$/i
 handler.owner = true // para que no aparezca en bots secundarios
 
 export default handler

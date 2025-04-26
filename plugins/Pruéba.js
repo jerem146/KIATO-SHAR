@@ -23,7 +23,6 @@ const handler = async (m, { conn }) => {
 
 handler.help = ['delprimary', 'unsetprimary']
 handler.tags = ['owner']
-handler.command = /^(delprimary|unsetprimary)$/i
 handler.owner = true
 
 export default handler

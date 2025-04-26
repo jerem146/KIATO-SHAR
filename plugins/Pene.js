@@ -2,7 +2,7 @@
 // Créditos a Neykoor
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 
-const handler = async (m, { conn, text, command, mentionedJid }) => {
+const handler = async (m, { conn, args, command, mentionedJid }) => {
   // Mensajes para cuando mencionan a alguien
   const mentionMessages = [
     (user) => `¿Acaso @${user} quiere *pene*? 😏`,
@@ -20,22 +20,31 @@ const handler = async (m, { conn, text, command, mentionedJid }) => {
     `¿Será que el grupo quiere *pene*? 🤔`,
     `*Pene* delivery, ¿quién lo pidió? 🚗💨`
   ];
-  
-  if (mentionedJid && mentionedJid.length > 0) {
-    // Si mencionaron a alguien
-    const target = mentionedJid[0];
-    const user = target.split('@')[0];
-    const randomMsgFn = mentionMessages[Math.floor(Math.random() * mentionMessages.length)];
-    const message = randomMsgFn(user);
-    
+
+  try {
+    if (mentionedJid && mentionedJid.length > 0) {
+      // Si mencionaron a alguien
+      const target = mentionedJid[0];
+      const user = target.replace(/@s\.whatsapp\.net/g, '').split('@')[0];
+      const randomMsgFn = mentionMessages[Math.floor(Math.random() * mentionMessages.length)];
+      const messageText = randomMsgFn(user);
+      
+      await conn.sendMessage(m.chat, {
+        text: messageText,
+        mentions: [target]
+      }, { quoted: m });
+    } else {
+      // Si no mencionaron a nadie
+      const randomMsg = soloMessages[Math.floor(Math.random() * soloMessages.length)];
+      await conn.sendMessage(m.chat, { 
+        text: randomMsg 
+      }, { quoted: m });
+    }
+  } catch (error) {
+    console.error('Error en el comando pene:', error);
     await conn.sendMessage(m.chat, { 
-      text: message, 
-      mentions: [target] 
+      text: 'Ocurrió un error al procesar tu solicitud de *pene* 😅' 
     }, { quoted: m });
-  } else {
-    // Si no mencionaron a nadie
-    const randomMsg = soloMessages[Math.floor(Math.random() * soloMessages.length)];
-    await conn.reply(m.chat, randomMsg, m);
   }
 };
 

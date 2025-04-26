@@ -10,7 +10,6 @@ let handler = async (m, { conn }) => {
   m.reply('Este grupo ha sido establecido como grupo principal.')
 }
 
-handler.command = handler.help = ['setprimary']
-handler.tags = ['owner']
+handler.command = ['setprimary']
 handler.group = true
-
+export default handler

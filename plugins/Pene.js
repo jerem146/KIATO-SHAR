@@ -1,4 +1,5 @@
-// plugins/Girasol.js
+// plugins/pene.js 
+//Creditos a Neykoor 
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 
 const handler = async (m, { conn, text, command }) => {

@@ -7,13 +7,7 @@ export default ({ event, api, cooldowns }) => {
     author: 'TuNombre',
     dependencies: ['cooldowns'],
     
-    // Configuración de handlers como solicitaste
-    handler: {
-      help: ['einfo'],
-      tags: ['economia'],
-      command: ['einfo'],
-      group: true,
-      register: true
+  
     },
     
     onCommand: async ({ command, args, user, cooldowns }) => {
@@ -76,6 +70,15 @@ export default ({ event, api, cooldowns }) => {
         return true; // Indica que el comando fue manejado
       }
       return false;
+
+      handler.help = ['einfo'];
+handler.tags = ['rpg'];
+handler.command = ['einfo']; 
+handler.group = true;
+handler.register = true;
+
+   export default handler;
+      
     }
   };
 };

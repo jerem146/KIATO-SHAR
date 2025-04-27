@@ -6,11 +6,8 @@ export default ({ event, api, cooldowns }) => {
     version: '1.0.0',
     author: 'TuNombre',
     dependencies: ['cooldowns'],
-    
-  
-    },
-    
-    onCommand: async ({ command, args, user, cooldowns }) => {
+
+    onCommand: async ({ command, args, user }) => {
       if (command === 'einfo') {
         try {
           // Obtener los cooldowns del usuario
@@ -70,15 +67,6 @@ export default ({ event, api, cooldowns }) => {
         return true; // Indica que el comando fue manejado
       }
       return false;
-
-      handler.help = ['einfo'];
-handler.tags = ['rpg'];
-handler.command = ['einfo']; 
-handler.group = true;
-handler.register = true;
-
-   export default handler;
-      
     }
   };
 };

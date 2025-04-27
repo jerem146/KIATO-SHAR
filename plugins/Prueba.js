@@ -1,35 +1,38 @@
-import moment from 'moment';
-moment.locale('es'); // Configura moment en español
-
 const handler = async (m, { conn, user }) => {
   try {
-    // Verificar si el usuario existe
-    if (!user) throw new Error('No se encontraron datos del usuario');
+    // Datos del usuario (simulados si no existen)
+    const lastMined = user.lastmining || "Nunca";
+    const miningCount = user.miningCount || 0;
+    const miningCooldown = user.miningCooldown || "Listo";
 
-    // Construir mensaje con información básica y tiempos de actividad
-    let message = `❀ *INFORMACIÓN DE USUARIO*\n\n` +
-                 `➪ *Usuario:* @${user.id}\n\n` +
-                 `📊 *Últimas actividades:*\n` +
-                 `│\n` +
-                 `├─ Últ. Aventura: ${user.lastAdventure ? moment(user.lastAdventure).fromNow() : 'Nunca'}\n` +
-                 `├─ Últ. Minería: ${user.lastmining ? moment(user.lastmining).fromNow() : 'Nunca'}\n` +
-                 `│\n` +
-                 `└─ *Nota:* Los cooldowns están en mantenimiento\n\n` +
-                 `ℹ️ Usa /help para más comandos`;
+    // Mensaje con estilo
+    const message = `
+╭─「 *🪙 MINERÍA* 」─
+│
+│ *👤 Usuario:* @${user.id}
+│ *⛏️ Último minado:* ${lastMined}
+│ *🔢 Veces minado:* ${miningCount}
+│ *⏱️ Estado:* ${miningCooldown}
+│
+╰──────────────
+    `.trim();
 
     // Enviar mensaje con mención
-    await conn.reply(m.chat, message, m, { mentions: [m.sender] });
+    await conn.sendMessage(m.chat, { 
+      text: message, 
+      mentions: [m.sender] 
+    }, { quoted: m });
 
   } catch (error) {
-    console.error('Error en userinfo:', error);
-    await conn.reply(m.chat, '❌ Error al mostrar la información. Intenta más tarde.', m);
+    console.error("Error en el comando minar:", error);
+    await conn.reply(m.chat, "❌ Error al mostrar datos de minería.", m);
   }
 };
 
-// Configuración del handler
+// Configuración del comando
 handler.help = ['einfo'];
 handler.tags = ['rpg'];
-handler.command = ['einfo'];
+handler.command = ['einfo']; 
 handler.group = true;
 handler.register = true;
 

@@ -30,20 +30,8 @@ let crm3 = "SBpbmZvLWRvbmFyLmpz"
 let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
-let rtx = "*⪛✰ ↫ 𝐃𝐞𝐬𝐭𝐢𝐧𝐲  -  Bσƚ ↬ ✰⪜*\n\n✐ Cσɳҽxισɳ SυႦ-Bσƚ Mσԃҽ QR\n\n✰ Con otro celular o en la PC escanea este QR para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » ✿ *Vincula tu cuenta usando el qr.*
-
-Sigue las instrucciones:
-✎ *Mas opciones » Dispositivos vinculados » Vincular nuevo dispositivo » Vincular usando qr.*
-
-_Recuerda que es recomendable no usar tu cuenta principal para registrar bots._n\n\
-✧ ¡↺ El codigo es valido por 45 segundos!."
-let rtx2 = "*⪛✰ ↫ 𝐃𝐞𝐬𝐭𝐢𝐧𝐲  -  Bσƚ ↬ ✰⪜*\n\n✐ Cσɳҽxισɳ SυႦ-Bσƚ Mσԃҽ Cσԃҽ\n\n✰ Usa este Código para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » ✿ *Vincula tu cuenta usando el codigo.*
-
-Sigue las instrucciones:
-☆ *Mas opciones » Dispositivos vinculados » Vincular nuevo dispositivo » Vincular usando numero.*
-
-_Recuerda que es recomendable no usar tu cuenta principal para registrar bots._
-↺ El codigo es valido por 60 segundos."
+let rtx = "*⪛✰ ↫ 𝚃𝚊𝚔𝚊𝚗𝚊𝚜𝚑𝚒  -  𝙷𝚘𝚜𝚑𝚒𝚗𝚘  -  𝙱𝚘𝚝 ↬ ✰⪜*\n\n✐ Cσɳҽxισɳ SυႦ-Bσƚ Mσԃҽ QR\n\n✰ Con otro celular o en la PC escanea este QR para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » Haga clic en los tres puntos en la esquina superior derecha\n\n\`2\` » Toque dispositivos vinculados\n\n\`3\` » Escanee este codigo QR para iniciar sesion con el bot\n\n✧ ¡Este código QR expira en 45 segundos!."
+let rtx2 = "*⪛✰ ↫ 𝚃𝚊𝚔𝚊𝚗𝚊𝚜𝚑𝚒  -  𝙷𝚘𝚜𝚑𝚒𝚗𝚘  -  𝙱𝚘𝚝 ↬ ✰⪜*\n\n✐ Cσɳҽxισɳ SυႦ-Bσƚ Mσԃҽ Cσԃҽ\n\n✰ Usa este Código para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » Haga clic en los tres puntos en la esquina superior derecha\n\n\`2\` » Toque dispositivos vinculados\n\n\`3\` » Selecciona Vincular con el número de teléfono\n\n\`4\` » Escriba el Código para iniciar sesion con el bot\n\n✧ No es recomendable usar tu cuenta principal."
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -56,7 +44,7 @@ let time = global.db.data.users[m.sender].Subs + 120000
 if (new Date - global.db.data.users[m.sender].Subs < 120000) return conn.reply(m.chat, `${emoji} Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m)
 const subBots = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])]
 const subBotsCount = subBots.length
-if (subBotsCount === 20) {
+if (subBotsCount === 2) {
 return m.reply(`${emoji2} No se han encontrado espacios para *Sub-Bots* disponibles.`)
 }
 /*if (Object.values(global.conns).length === 30) {

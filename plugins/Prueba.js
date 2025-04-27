@@ -1,39 +1,25 @@
 const handler = async (m, { conn, user }) => {
-  try {
-    // Datos del usuario (simulados si no existen)
-    const lastMined = user.lastmining || "Nunca";
-    const miningCount = user.miningCount || 0;
-    const miningCooldown = user.miningCooldown || "Listo";
+  // Debug: Ver datos REALES del usuario
+  console.log("Datos actuales del usuario:", JSON.stringify(user, null, 2));
 
-    // Mensaje con estilo
-    const message = `
-╭─「 *🪙 MINERÍA* 」─
+  const lastMined = user.lastmining 
+    ? new Date(user.lastmining).toLocaleString('es') 
+    : "Nunca";
+
+  const miningCount = user.miningCount ?? 0; // Usa 0 si no existe
+
+  const message = `
+╭─「 *⛏️ ESTADO DE MINERÍA* 」─
 │
-│ *👤 Usuario:* @${user.id}
-│ *⛏️ Último minado:* ${lastMined}
-│ *🔢 Veces minado:* ${miningCount}
-│ *⏱️ Estado:* ${miningCooldown}
+│ • *Usuario:* @${user.id}
+│ • *Último minado:* ${lastMined}
+│ • *Total minado:* ${miningCount} veces
+│ • *Cooldown:* ${user.miningCooldown ? "🔄 En espera" : "✅ Listo"}
 │
-╰──────────────
-    `.trim();
+╰─────────────────`.trim();
 
-    // Enviar mensaje con mención
-    await conn.sendMessage(m.chat, { 
-      text: message, 
-      mentions: [m.sender] 
-    }, { quoted: m });
-
-  } catch (error) {
-    console.error("Error en el comando minar:", error);
-    await conn.reply(m.chat, "❌ Error al mostrar datos de minería.", m);
-  }
+  await conn.sendMessage(m.chat, { text: message, mentions: [m.sender] }, { quoted: m });
 };
 
-// Configuración del comando
-handler.help = ['einfo'];
-handler.tags = ['rpg'];
-handler.command = ['einfo']; 
-handler.group = true;
-handler.register = true;
-
+handler.command = ['einfo'];
 export default handler;

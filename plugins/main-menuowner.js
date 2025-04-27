@@ -30,9 +30,9 @@ let owner = `
 > ✦ El Bot dara admin automáticamente solo si el Bot es admin.
 ᰔᩚ *#listban • #banlist*
 > ✦ Lista de usuarios y chats baneados.
-ᰔᩚ *#banuser*
+ᰔᩚ *#banuser • #ban*
 > ✦ Banear a un usuario.
-ᰔᩚ *#unbanuser*
+ᰔᩚ *#unbanuser • #unban*
 > ✦ Desbanear a un usuario.
 ᰔᩚ *#dsowner • #delai*
 > ✦ Elimina archivos innecesarios de sesión.

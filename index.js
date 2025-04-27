@@ -41,9 +41,9 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 //let require = createRequire(megu)
 let { say } = cfonts
 
-console.log(chalk.bold.redBright(`\n✰ Iniciando Destiny-Bot ✰\n`))
+console.log(chalk.bold.redBright(`\n✰ Iniciando Takanashi-Hoshino-Bot ✰\n`))
 
-say('DestinyBot-MD', {
+say('HoshinoBot-MD', {
 font: 'block',
 align: 'center',
 colors: ['magentaBright']

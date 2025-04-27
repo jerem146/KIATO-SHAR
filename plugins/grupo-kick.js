@@ -29,7 +29,7 @@ var handler = async (m, { conn, participants, usedPrefix, command }) => {
 
 handler.help = ['kick'];
 handler.tags = ['grupo'];
-handler.command = ['kick','echar','sacar'];
+handler.command = ['kick','echar','sacar','fueranegro'];
 handler.admin = true;
 handler.group = true;
 handler.register = true

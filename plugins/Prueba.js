@@ -27,9 +27,9 @@ const handler = async (m, { conn, user }) => {
 };
 
 // Configuración del handler
-handler.help = ['userinfo', 'info'];
+handler.help = ['einfo'];
 handler.tags = ['rpg'];
-handler.command = ['userinfo', 'info', 'estado'];
+handler.command = ['einfo'];
 handler.group = true;
 handler.register = true;
 

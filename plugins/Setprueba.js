@@ -1,4 +1,3 @@
-// comandos/setprimary.js
 import db from '../lib/database.js'
 
 export async function handler(m, { conn, text, isOwner }) {
@@ -7,11 +6,19 @@ export async function handler(m, { conn, text, isOwner }) {
   const mentionedJid = m.mentionedJid && m.mentionedJid[0]
   if (!mentionedJid) throw 'Debes mencionar al bot que quieres establecer como principal.\nEjemplo: /setprimary @tuBot'
 
-  // Guardar el bot principal en la base de datos
-  db.data.primaryBot = mentionedJid
-  await db.write() // <-- Esto es esencial para guardar los cambios
+  if (!db.data) {
+    console.error('Base de datos no cargada')
+    throw 'Error interno: la base de datos no está disponible.'
+  }
 
-  // Enviar mensaje de confirmación etiquetando al bot
+  db.data.primaryBot = mentionedJid
+  try {
+    await db.write()
+  } catch (e) {
+    console.error('Error al guardar la base de datos:', e)
+    throw 'No se pudo guardar la información en la base de datos.'
+  }
+
   await conn.sendMessage(m.chat, {
     text: `✅ Bot principal establecido:\n@${mentionedJid.split('@')[0]}`,
     mentions: [mentionedJid]

@@ -1,4 +1,4 @@
-//esteban.js
+//prueba.js
 //Creditos a Neykoor 
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 

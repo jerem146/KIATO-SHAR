@@ -17,6 +17,9 @@ export async function handler(m, { conn, text, isOwner, args }) {
   }, { quoted: m })
 }
 
-handler.command = /^setprimary$/i
+handler.help = ['setprimary']
+handler.tags = ['info']
 handler.owner = true
+handler.command = ['setprimary']
+
 export default handler

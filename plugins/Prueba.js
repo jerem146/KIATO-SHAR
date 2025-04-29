@@ -24,13 +24,15 @@ const handler = async (m, { conn }) => {
     : 'Ya puedes minar';
 
   const message = `
- 
-     *❀Usuario:* @${m.sender.split('@')[0]}
-     
-  *⛏️ ÚLTIMO MINADO*
-  • *Fecha:* ${lastMined}
-  • *Cooldown:* ${remainingTime}
-│
+
+❀ *Información de Enfriamientos*
+
+*✧Usuario ›* @${m.sender.split('@')[0]}
+
+> ✧ *Minar:* (usa el comando correspondiente)
+> ✧ *Última vez:* ${lastMined}
+> ✧ *Cooldown:* ${remainingTime}
+
 ╰────────────────`.trim();
 
   await conn.sendMessage(m.chat, { 

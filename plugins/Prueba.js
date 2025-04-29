@@ -2,9 +2,14 @@ const handler = async (m, { conn }) => {
   let user = global.db.data.users[m.sender];
   if (!user) return conn.reply(m.chat, '❌ No tienes datos registrados.', m);
 
+  const COOLDOWN = 10 * 60 * 1000; // 10 minutos en milisegundos
+  const now = Date.now();
+  const last = user.lastmiming || 0;
+  const remaining = COOLDOWN - (now - last);
+
   // Formatea la fecha del último minado
-  const lastMined = user.lastmiming 
-    ? new Date(user.lastmiming).toLocaleString('es-ES', {
+  const lastMined = last
+    ? new Date(last).toLocaleString('es-ES', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
@@ -13,12 +18,17 @@ const handler = async (m, { conn }) => {
       })
     : 'Nunca';
 
-  // Mensaje minimalista
+  // Formatea el tiempo restante (si hay)
+  const remainingTime = remaining > 0
+    ? `${Math.floor(remaining / 60000)}m ${Math.floor((remaining % 60000) / 1000)}s`
+    : 'Ya puedes minar';
+
   const message = `
 ╭─「 *⛏️ ÚLTIMO MINADO* 」─
 │
 │ • *Usuario:* @${m.sender.split('@')[0]}
 │ • *Fecha:* ${lastMined}
+│ • *Cooldown:* ${remainingTime}
 │
 ╰────────────────`.trim();
 
@@ -28,7 +38,6 @@ const handler = async (m, { conn }) => {
   }, { quoted: m });
 };
 
-// Configuración
 handler.help = ['lastmine'];
 handler.tags = ['minería'];
 handler.command = ['lastmine', 'ultimominado', 'mylastmine'];

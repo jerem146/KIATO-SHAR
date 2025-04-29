@@ -25,11 +25,11 @@ const handler = async (m, { conn }) => {
 
   const message = `
  
-  *❀Usuario:* @${m.sender.split('@')[0]}
-│
-│ *⛏️ ÚLTIMO MINADO*
-│ • *Fecha:* ${lastMined}
-│ • *Cooldown:* ${remainingTime}
+     *❀Usuario:* @${m.sender.split('@')[0]}
+     
+  *⛏️ ÚLTIMO MINADO*
+  • *Fecha:* ${lastMined}
+  • *Cooldown:* ${remainingTime}
 │
 ╰────────────────`.trim();
 

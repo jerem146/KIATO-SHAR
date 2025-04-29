@@ -4,7 +4,7 @@ const handler = async (m, { conn, text, command }) => {
   await conn.reply(m.chat, 'Deja de acosador las niñas negro pedófilo croma vergas', m);
 };
 
-handler.command = handler.help = ['esteban', 'pedofilo']
+handler.command = handler.help = ['esteban']
 handler.tags = ['fun']
 handler.group = true
 

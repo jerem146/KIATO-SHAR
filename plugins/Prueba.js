@@ -29,7 +29,7 @@ const handler = async (m, { conn }) => {
 
 *✧Usuario ›* @${m.sender.split('@')[0]}
 
-> ✧ *Minar:*  //usa el comando correspondiente
+> ✧ *Minar:*  
 > ✧ *Última vez:* ${lastMined}
 > ✧ *Cooldown:* ${remainingTime}
 

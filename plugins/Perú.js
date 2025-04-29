@@ -1,5 +1,7 @@
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 
+console.log('Comando peru cargado correctamente');
+
 const handler = async (m, { conn, text, command }) => {
   await conn.reply(m.chat, 'ay mi gatito miau miau miau', m);
 };

@@ -1,7 +1,7 @@
 // comandos/setprimary.js
 import db from '../lib/database.js'
 
-export async function handler(m, { conn, text, isOwner, args }) {
+export async function handler(m, { conn, text, isOwner }) {
   if (!isOwner) throw 'Este comando solo puede usarlo el owner.'
 
   const mentionedJid = m.mentionedJid && m.mentionedJid[0]
@@ -9,6 +9,7 @@ export async function handler(m, { conn, text, isOwner, args }) {
 
   // Guardar el bot principal en la base de datos
   db.data.primaryBot = mentionedJid
+  await db.write() // <-- Esto es esencial para guardar los cambios
 
   // Enviar mensaje de confirmación etiquetando al bot
   await conn.sendMessage(m.chat, {

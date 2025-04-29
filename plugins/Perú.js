@@ -10,5 +10,5 @@ handler.group = true
 
 
 export default handler;
-import { areJidsSameUser } from '@whiskeysockets/baileys';
+
 

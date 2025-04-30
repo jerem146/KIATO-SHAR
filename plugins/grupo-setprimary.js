@@ -1,10 +1,11 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
 
 const PRIMARY_FILE = './database/primary_group.json'
-const MAIN_BOT_ID = '573214401313@s.whatsapp.net' // Cambia esto si tu número es otro
+const MAIN_BOT_NUMBER = '573214401313' // Tu número principal
 
 export async function handler(m, { conn, isOwner, isAdmin }) {
-  if (conn.user?.id !== MAIN_BOT_ID) return // Solo el bot principal puede ejecutar esto
+  const currentBotNumber = conn.user?.id?.split('@')[0]?.split(':')[0]
+  if (currentBotNumber !== MAIN_BOT_NUMBER) return // Bloquea sub-bots
 
   if (!m.isGroup) throw 'Este comando solo se puede usar en grupos.'
   if (!isOwner && !isAdmin) throw 'Solo los administradores o el propietario pueden usar este comando.'
@@ -43,5 +44,3 @@ handler.group = true
 handler.owner = true
 handler.register = true
 handler.tags = ['grupo']
-
-export default handler;

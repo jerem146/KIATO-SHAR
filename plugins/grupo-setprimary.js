@@ -44,3 +44,5 @@ handler.group = true
 handler.owner = true
 handler.register = true
 handler.tags = ['grupo']
+
+export default handler;

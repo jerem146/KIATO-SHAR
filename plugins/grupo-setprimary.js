@@ -19,6 +19,7 @@ export async function handler(m, { conn, isOwner, isAdmin, args }) {
 
   await conn.reply(m.chat, 'Este grupo ahora es el grupo primario.', m)
 }
+
 handler.help = ['set'];
 handler.command = ['set'];
 handler.group  = true

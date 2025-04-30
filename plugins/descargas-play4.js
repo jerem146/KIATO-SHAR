@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import fetch from 'node-fetch';
 import axios from 'axios';
 import yts from 'yt-search';
 import { promisify } from 'util';
@@ -37,11 +36,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
     const filePath = path.join(tmpDir, `${Date.now()}.mp3`);
 
-    const audioStream = await axios.get(downloadUrl, { responseType: 'stream' });
-    await streamPipeline(audioStream.data, fs.createWriteStream(filePath, { highWaterMark: 64 * 1024 }));
+    const response = await axios.get(downloadUrl, { responseType: 'stream' });
+    const writer = fs.createWriteStream(filePath);
+    await streamPipeline(response.data, writer);
+
+    const audioBuffer = await fs.promises.readFile(filePath);
 
     await conn.sendMessage(m.chat, {
-      audio: fs.readFileSync(filePath),
+      audio: audioBuffer,
       fileName: `${title}.mp3`,
       mimetype: "audio/mpeg",
       contextInfo: {
@@ -57,7 +59,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       }
     }, { quoted: m });
 
-    fs.unlinkSync(filePath); // Limpieza
+    await fs.promises.unlink(filePath);
   } catch (err) {
     console.error(err);
     return conn.reply(m.chat, `❌ Error: ${err.message || err}`, m);
@@ -72,7 +74,7 @@ const waitForDownload = async (id) => {
     } catch (e) {
       console.error('Error en waitForDownload:', e);
     }
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1000)); // Espera reducida a 1 segundo
   }
 };
 

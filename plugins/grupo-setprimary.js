@@ -19,11 +19,11 @@ export async function handler(m, { conn, isOwner, isAdmin, args }) {
 
   await conn.reply(m.chat, 'Este grupo ahora es el grupo primario.', m)
 }
+handler.help = ['set'];
+handler.command = ['set'];
+handler.group  = true
+handler.owner = true
+handler.register = true
+handler.tags = ['grupo'];
+handler.register = true;
 
-export const command = /^grupo\-setprimary$/i
-export const group = true
-export const owner = false
-export const admin = true
-export const register = true
-export const tags = ['grupo']
-export const help = ['grupo-setprimary - Establece el grupo actual como principal']

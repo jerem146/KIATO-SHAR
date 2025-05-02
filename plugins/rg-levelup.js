@@ -31,29 +31,17 @@ let handler = async (m, { conn }) => {
 
       await conn.sendMessage(m.chat, { text: txt }, { quoted: m });
 
-      // Imagen y mensaje premium
-      const imgUrl = 'https://files.catbox.moe/53iycc.jpeg';
-      const thumbnail = await (await fetch(imgUrl)).buffer();
+      // Enviar imagen directamente
+      const imageBuffer = await fetch('https://files.catbox.moe/53iycc.jpeg').then(res => res.buffer());
+      const caption = `✨ *Levelup desbloqueado* ✨\n\nHola ${name}, ahora que has subido de nivel, descubre los beneficios especiales que puedes obtener como usuario Destiny.`;
 
       await conn.sendMessage(m.chat, {
-        image: { url: imgUrl },
-        caption: `✨ *Levelup desbloqueado* ✨\n\nHola ${name}, ahora que has subido de nivel, descubre los beneficios especiales que puedes obtener como usuario Destiny.`,
-        mentions: [m.sender],
-        contextInfo: {
-          externalAdReply: {
-            title: 'Experiencia Level Up 🌱',
-            body: `Hola ${name}, descubre tus beneficios`,
-            thumbnail,
-            sourceUrl: 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n',
-            mediaType: 1,
-            renderLargerThumbnail: true,
-            showAdAttribution: true
-          }
-        }
+        image: imageBuffer,
+        caption
       }, { quoted: m });
 
     } else {
-      // No subió de nivel, solo mostrar stats
+      // Solo mostrar stats
       let users = Object.entries(global.db.data.users).map(([jid, data]) => ({ ...data, jid }));
       let sorted = users.sort((a, b) => (b.level || 0) - (a.level || 0));
       let rank = sorted.findIndex(u => u.jid === who) + 1;

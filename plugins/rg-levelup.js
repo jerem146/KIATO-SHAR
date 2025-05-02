@@ -31,7 +31,7 @@ let handler = async (m, { conn }) => {
       await conn.sendMessage(m.chat, { text: txt }, { quoted: m });
 
       // Bloque Premium Info
-      let pp = 'https://files.catbox.moe/nqw9dm.jpeg';
+      let pp = 'https://files.catbox.moe/53iycc.jpeg';
       let infoPremium = `✨ *levelup Desbloqueado* ✨\n\nHola ${name}, ahora que has subido de nivel, descubre los beneficios especiales que puedes obtener como usuario Destiny.`;
 
       await conn.sendFile(m.chat, pp, 'premium-info.jpg', infoPremium, m, null, {

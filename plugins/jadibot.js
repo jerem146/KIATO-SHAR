@@ -14,7 +14,7 @@ let handler = async (m, { conn, command, usedPrefix, args, text, isOwner }) => {
   const emoji2 = '⚠️';
   const emoji3 = '🗑️';
   const msm = '❗';
-  const imageUrl = 'https://qu.ax/iKouo.jpeg'; // Puedes personalizar esta URL
+  const imageUrl = 'https://files.catbox.moe/r5ziex.jpeg'; // Puedes personalizar esta URL
 
   async function reportError(e) {
     await m.reply(`${msm} Ocurrió un error.`);

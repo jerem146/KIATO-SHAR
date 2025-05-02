@@ -10,12 +10,11 @@ async function handler(m, { conn: _envio }) {
       uniqueUsers.set(jid, {
         ...conn.user,
         jid,
-        tiempoActivo: conn.tiempoInicio || Date.now() // Marcar el inicio si no existe
+        tiempoActivo: conn.tiempoInicio || Date.now()
       })
     }
   })
 
-  // Limitar a 10 bots
   const botsActivos = Array.from(uniqueUsers.values()).slice(0, 10)
 
   const message = botsActivos.map((user, index) => {
@@ -38,9 +37,9 @@ async function handler(m, { conn: _envio }) {
 }
 
 function msToTime(ms) {
-  let h = Math.floor(ms / (1000 * 60 * 60))
-  let m = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60))
-  let s = Math.floor((ms % (1000 * 60)) / 1000)
+  const h = Math.floor(ms / 3600000)
+  const m = Math.floor((ms % 3600000) / 60000)
+  const s = Math.floor((ms % 60000) / 1000)
   return `${h}h ${m}m ${s}s`
 }
 

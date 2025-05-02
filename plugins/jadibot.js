@@ -10,14 +10,17 @@ async function handler(m, { conn: _envio }) {
       uniqueUsers.set(jid, {
         ...conn.user,
         jid,
-        tiempoActivo: conn.uptime || Date.now()  // Corrección aquí
+        tiempoActivo: conn.uptime || Date.now()
       })
     }
   })
 
   const botsActivos = Array.from(uniqueUsers.values()).slice(0, 10)
+  const totalBots = uniqueUsers.size
+  const limite = 10
+  const leerMas = String.fromCharCode(8206).repeat(4001)
 
-  const message = botsActivos.map((user, index) => {
+  const listaBots = botsActivos.map((user, index) => {
     const tiempoMs = Date.now() - user.tiempoActivo
     const tiempoActivo = msToTime(tiempoMs)
     return `┌  ☘︎  *${index + 1}* : @${user.jid}
@@ -28,7 +31,7 @@ async function handler(m, { conn: _envio }) {
 
   const responseMessage = botsActivos.length === 0
     ? '*No hay bots activos actualmente.*'
-    : `–  *Destiny prueba*\n\n${message.trim()}`
+    : `*Total de bots activos:* ${totalBots}\n*Límite:* ${limite}\n\n${leerMas}\n${listaBots.trim()}`
 
   let img = await (await fetch(`https://files.catbox.moe/r5ziex.jpeg`)).buffer()
   await _envio.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, false, {

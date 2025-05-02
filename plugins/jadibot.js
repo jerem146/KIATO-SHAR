@@ -10,7 +10,7 @@ async function handler(m, { conn: _envio }) {
       uniqueUsers.set(jid, {
         ...conn.user,
         jid,
-        tiempoActivo: conn.tiempoInicio || Date.now()
+        tiempoActivo: conn.uptime || Date.now()  // Corrección aquí
       })
     }
   })

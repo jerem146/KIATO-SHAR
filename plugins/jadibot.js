@@ -6,7 +6,7 @@ async function handler(m, { conn: _envio }) {
 
   global.conns.forEach((conn) => {
     if (conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED) {
-      const jid = conn.user.jid.replace(/[^0-9]/g, '')
+      const jid = conn.user.jid.replace(/[^0-9]/g, '') //Total activos 
       uniqueUsers.set(jid, {
         ...conn.user,
         jid,
@@ -17,7 +17,7 @@ async function handler(m, { conn: _envio }) {
 
   const botsActivos = Array.from(uniqueUsers.values()).slice(0, 10)
   const totalBots = uniqueUsers.size
-  const limite = 10
+  const limite = 10 //limite de bots
   const leerMas = String.fromCharCode(8206).repeat(4001)
 
   // Bot con más tiempo activo
@@ -44,19 +44,19 @@ ${leerMas}
 
 ${listaBots}`.trim()
 
-  let img = await (await fetch(`https://files.catbox.moe/r5ziex.jpeg`)).buffer()
+  let img = await (await fetch(`https://files.catbox.moe/r5ziex.jpeg`)).buffer() //imagen para cambiarlo
   await _envio.sendFile(m.chat, img, 'thumbnail.jpg', decorado, m, false, {
     mentions: _envio.parseMention(decorado)
   })
 }
-
+//Los tiempos 
 function msToTime(ms) {
   const h = Math.floor(ms / 3600000)
   const m = Math.floor((ms % 3600000) / 60000)
   const s = Math.floor((ms % 60000) / 1000)
   return `${h}h ${m}m ${s}s`
 }
-
+//Comandos 
 handler.command = ['listjadibot', 'bots']
 handler.help = ['bots']
 handler.tags = ['serbot']

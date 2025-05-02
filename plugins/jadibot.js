@@ -20,22 +20,33 @@ async function handler(m, { conn: _envio }) {
   const limite = 10
   const leerMas = String.fromCharCode(8206).repeat(4001)
 
+  // Bot con más tiempo activo
+  const botMasTiempo = Array.from(uniqueUsers.values()).sort((a, b) => (a.tiempoActivo || 0) - (b.tiempoActivo || 0))[0]
+  const tiempoMsTop = Date.now() - botMasTiempo.tiempoActivo
+  const tiempoTop = msToTime(tiempoMsTop)
+  const topBot = `╭─────⊷ *Bot con más tiempo activo*\n│ 👑 @${botMasTiempo.jid}\n│ ⏳ Tiempo: ${tiempoTop}\n╰──────────────────`
+
   const listaBots = botsActivos.map((user, index) => {
     const tiempoMs = Date.now() - user.tiempoActivo
     const tiempoActivo = msToTime(tiempoMs)
-    return `┌  ☘︎  *${index + 1}* : @${user.jid}
-│  ☘︎  *Link* : http://wa.me/${user.jid}
-│  ☘︎  *Activo* : ${tiempoActivo}
-└  ☘︎  *Nombre* : ${user.name || 'Destiny ☘︎'}\n`
-  }).join('\n')
+    return `╭─〔 *${index + 1}.* 〕\n│ ☘︎ *Usuario:* @${user.jid}\n│ 📎 *Link:* http://wa.me/${user.jid}\n│ ⏱️ *Activo:* ${tiempoActivo}\n╰──────────────`
+  }).join('\n\n')
 
-  const responseMessage = botsActivos.length === 0
-    ? '*No hay bots activos actualmente.*'
-    : `*Total de bots activos:* ${totalBots}\n*Límite:* ${limite}\n\n${leerMas}\n${listaBots.trim()}`
+  const decorado = `
+╭━━━〔 𝑺𝒖𝒃-𝑩𝒐𝒕𝒔 𝑨𝒄𝒕𝒊𝒗𝒐𝒔 〕━━━⬣
+┃ ✦ *Total:* ${totalBots}
+┃ ✦ *Límite:* ${limite}
+╰━━━━━━━━━━━━━━━━⬣
+
+${topBot}
+
+${leerMas}
+
+${listaBots}`.trim()
 
   let img = await (await fetch(`https://files.catbox.moe/r5ziex.jpeg`)).buffer()
-  await _envio.sendFile(m.chat, img, 'thumbnail.jpg', responseMessage, m, false, {
-    mentions: _envio.parseMention(responseMessage)
+  await _envio.sendFile(m.chat, img, 'thumbnail.jpg', decorado, m, false, {
+    mentions: _envio.parseMention(decorado)
   })
 }
 

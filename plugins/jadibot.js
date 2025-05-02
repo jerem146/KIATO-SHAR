@@ -17,7 +17,7 @@ async function handler(m, { conn: _envio }) {
 
   const botsActivos = Array.from(uniqueUsers.values()).slice(0, 10)
   const totalBots = uniqueUsers.size
-  const limite = 10 //limite de bots
+  const limite = 9 //limite de bots
   const leerMas = String.fromCharCode(8206).repeat(4001)
 
   // Bot con más tiempo activo

@@ -158,10 +158,8 @@ version,
 }
 
 global.conn = makeWASocket(connectionOptions)
-
-if (conn?.ev && !conn.authState?.creds?.me) conn.ev.flush()
-
-if (!fs.existsSync(`./${sessions}/creds.json`)) {
+global.conn = makeWASocket(connectionOptions)
+if (!fs.existsSync(`./${authFile}/creds.json`)) {
 if (opcion === '2' || methodCode) {
 opcion = '2'
 if (!conn.authState.creds.registered) {
@@ -170,7 +168,7 @@ if (!!phoneNumber) {
 addNumber = phoneNumber.replace(/[^0-9]/g, '')
 } else {
 do {
-phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`✦ Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright(`✏  Ejemplo: 57321×××××××`)}\n${chalk.bold.magentaBright('---> ')}`)))
+phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright("CONSEJO: Copie el número de WhatsApp y péguelo en la consola.")}\n${chalk.bold.yellowBright("Ejemplo: +54123456789")}\n${chalk.bold.magentaBright('---> ')}`)))
 phoneNumber = phoneNumber.replace(/\D/g,'')
 if (!phoneNumber.startsWith('+')) {
 phoneNumber = `+${phoneNumber}`
@@ -181,8 +179,8 @@ addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`✧ CÓDIGO DE VINCULACIÓN ✧`)), chalk.bold.white(chalk.white(codeBot)))
-}, 3000)
+console.log(chalk.bold.white(chalk.bgMagenta('CÓDIGO DE VINCULACIÓN:')), chalk.bold.white(chalk.white(codeBot)))
+}, 2000)
 }}}
 }
 

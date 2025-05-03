@@ -1,18 +1,16 @@
 import { canLevelUp, xpRange } from '../lib/levelling.js';
 import db from '../lib/database.js';
-import fetch from 'node-fetch';
-import fs from 'fs';
 import axios from 'axios';
 
 let handler = async (m, { conn }) => {
     try {
-        // Identificar usuario
+        // Obtener información del usuario
         let mentionedUser = m.mentionedJid?.[0];
         let citedMessage = m.quoted?.sender;
         let who = mentionedUser || citedMessage || m.sender;
         let name = await conn.getName(who);
 
-        // Verificar base de datos
+        // Validar base de datos
         if (!global.db?.data?.users) {
             return await conn.reply(m.chat, '⚠️ *Error en la base de datos*', m);
         }
@@ -22,57 +20,17 @@ let handler = async (m, { conn }) => {
             return await conn.reply(m.chat, '🚫 *Usuario no encontrado*', m);
         }
 
-        // Calcular niveles
+        // Calcular progreso
         let { min, xp } = xpRange(user.level, global.multiplier);
-        let before = user.level;
-        while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++;
+        let progress = Math.floor(((user.exp - min) / xp) * 100);
+        
+        // Obtener ranking
+        let users = Object.entries(global.db.data.users).map(([jid, data]) => ({ ...data, jid }));
+        let sorted = users.sort((a, b) => (b.level || 0) - (a.level || 0));
+        let rank = sorted.findIndex(u => u.jid === who) + 1;
 
-        if (before !== user.level) {
-            // Mensaje de levelup con diseño especial
-            let levelupTxt = `
-ᥫ᭡ *¡Felicidades, ${name}!* ❀
-            
-*Has subido de nivel* ✨
-*${before}* ➔ *${user.level}* [ ${user.role} ]
-
-✰ *Nivel anterior*: ${before}
-✦ *Nuevo nivel*: ${user.level}
-❖ *Experiencia*: ${user.exp}
-➨ *Próximo nivel*: ${xp - user.exp} XP más
-
-> Continúa interactuando para subir más niveles!
-            `.trim();
-
-            try {
-                // Opción 1: Imagen desde URL (más confiable con axios)
-                let imageUrl = 'https://i.imgur.com/3QZz7Xa.jpeg'; // URL alternativa
-                let response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-                let imageBuffer = Buffer.from(response.data, 'binary');
-
-                await conn.sendMessage(m.chat, {
-                    image: imageBuffer,
-                    caption: levelupTxt,
-                    mentions: [who]
-                }, { quoted: m });
-
-                // Mensaje adicional de celebración
-                await conn.sendMessage(m.chat, {
-                    text: '✨ *¡Nuevo nivel desbloqueado!* ✨\nAhora tienes acceso a más comandos y beneficios.'
-                }, { quoted: m });
-
-            } catch (imageError) {
-                console.error('Error con imagen:', imageError);
-                // Enviar solo texto si falla la imagen
-                await conn.reply(m.chat, levelupTxt, m);
-            }
-        } else {
-            // Mostrar estadísticas con diseño especial
-            let users = Object.entries(global.db.data.users).map(([jid, data]) => ({ ...data, jid }));
-            let sorted = users.sort((a, b) => (b.level || 0) - (a.level || 0));
-            let rank = sorted.findIndex(u => u.jid === who) + 1;
-            let progress = Math.floor(((user.exp - min) / xp) * 100);
-
-            let statsTxt = `
+        // Crear mensaje con el formato exacto solicitado
+        let statsMessage = `
 *「✿」USUARIO* ◢ ${name} ◤
 
 ✦ *Nivel*: ${user.level}
@@ -81,19 +39,34 @@ let handler = async (m, { conn }) => {
 ➨ *Progreso*: ${progress}% (${user.exp - min}/${xp})
 # *Posición*: ${rank}° de ${sorted.length}
 ᥫ᭡ *Comandos usados*: ${user.commands || 0}
-            `.trim();
+        `.trim();
 
-            await conn.reply(m.chat, statsTxt, m);
+        try {
+            // Enviar imagen con el texto como pie de foto
+            let imageUrl = 'https://files.catbox.moe/53iycc.jpeg'; // Imagen de diseño elegante
+            let response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+            
+            await conn.sendMessage(m.chat, {
+                image: Buffer.from(response.data),
+                caption: statsMessage,
+                mentions: [who]
+            }, { quoted: m });
+
+        } catch (imageError) {
+            console.error('Error al enviar imagen:', imageError);
+            // Enviar solo texto si falla la imagen
+            await conn.reply(m.chat, statsMessage, m);
         }
+
     } catch (e) {
-        console.error('Error en levelup:', e);
-        await conn.reply(m.chat, '🚀 *¡Ups! Error al mostrar tu progreso*', m);
+        console.error('Error en el comando level:', e);
+        await conn.reply(m.chat, '⚠️ *Error al mostrar las estadísticas*', m);
     }
 };
 
-handler.help = ['levelup', 'lvl'];
+handler.help = ['level', 'lvl'];
 handler.tags = ['rpg'];
-handler.command = ['nivel', 'lvl', 'level', 'levelup'];
+handler.command = ['nivel', 'lvl', 'level'];
 handler.register = true;
 handler.group = true;
 

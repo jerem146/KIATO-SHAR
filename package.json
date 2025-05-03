@@ -1,6 +1,6 @@
 {
 "name": "DestinyBot-MD",
-"version": "2.0.0",
+"version": "2.2.0",
 "description": "Super WhatsApp Bot Multi Device",
 "main": "index.js",
 "type": "module",
@@ -13,6 +13,8 @@
 "start": "node index.js",
 "qr": "node index.js qr",
 "code": "node index.js code",
+"test": "node test.js",
+"test2": "nodemon index.js", 
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
@@ -22,14 +24,14 @@
 },
 "repository": {
 "type": "git",
-"url": "git+https://github.com/https0J/Destiny-Bot.git"
+"url": "githttps://github.com/https0J/Destiny-Bot.git+"
 },
 "bugs": {
 "url": "https://github.com/https0J/Destiny-Bot/issues"
 },
 "license": "GPL-3.0-or-later",
 "dependencies": {
-"@whiskeysockets/baileys": "https://github.com/FizzxyTheGreat/baileyss",
+"@whiskeysockets/baileys": "github:ds6/bails",
 "@adiwajshing/keyed-db": "^0.2.4",
 "@bochilteam/scraper": "^4.2.4",
 "@bochilteam/scraper-sosmed": "^1.0.5",
@@ -93,9 +95,6 @@
 "mime-types": "^2.1.35",
 "api-dylux": "^1.7.2",
 "yargs": "^17.3.1"
-},
-"resolutions": {
-"@whiskeysockets/baileys": "github:ds6/bails"
 },
 "optionalDependencies": {
 "wa-sticker-formatter": "^4.3.2",

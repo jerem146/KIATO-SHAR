@@ -157,7 +157,9 @@ defaultQueryTimeoutMs: undefined,
 version,
 }
 
-global.conn = makeWASocket(connectionOptions);
+global.conn = makeWASocket(connectionOptions)
+
+if (conn?.ev && !conn.authState?.creds?.me) conn.ev.flush()
 
 if (!fs.existsSync(`./${sessions}/creds.json`)) {
 if (opcion === '2' || methodCode) {

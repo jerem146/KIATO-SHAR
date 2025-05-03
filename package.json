@@ -1,6 +1,6 @@
 {
 "name": "DestinyBot-MD",
-"version": "1.0.0",
+"version": "2.0.0",
 "description": "Super WhatsApp Bot Multi Device",
 "main": "index.js",
 "type": "module",
@@ -13,14 +13,12 @@
 "start": "node index.js",
 "qr": "node index.js qr",
 "code": "node index.js code",
-"test": "node test.js",
-"test2": "nodemon index.js", 
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
 "homepage": "https://github.com/https0J/Destiny-Bot",
 "author": {
-"name": "https_(S2)"
+"name": "David-Chian"
 },
 "repository": {
 "type": "git",
@@ -95,6 +93,9 @@
 "mime-types": "^2.1.35",
 "api-dylux": "^1.7.2",
 "yargs": "^17.3.1"
+},
+"resolutions": {
+"@whiskeysockets/baileys": "github:ds6/bails"
 },
 "optionalDependencies": {
 "wa-sticker-formatter": "^4.3.2",

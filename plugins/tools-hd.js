@@ -1,63 +1,36 @@
-import FormData from "form-data"
-import Jimp from "jimp"
-import uploadImage from '../lib/uploadImage.js'
-import fetch from "node-fetch"
+import axios from "axios";
+import uploadImage from "../lib/uploadImage.js";
 
-const handler = async (m, { conn, usedPrefix, command }) => {
+const handler = async (m, { conn }) => {
   try {
-    let q = m.quoted ? m.quoted : m
-    let mime = (q.msg || q).mimetype || q.mediaType || ""
-
-    if (!mime) {
-      return m.reply(`❀ Por favor, envie una imagen o responda a la imagen utilizando el comando.`)
+    const q = m.quoted || m;
+    const mime = (q.msg || q).mimetype || q.mediaType || "";
+    if (!mime.startsWith("image/")) {
+      return conn.reply(m.chat, " Responde a una *Imagen.*", m);
     }
 
-    if (!/image\/(jpe?g|png)/.test(mime)) {
-      return m.reply(`✧ El formato del archivo (${mime}) no es compatible, envía o responde a una imagen.`)
-    }
+    await m.react("🕓");
+    const imgBuffer = await q.download?.();
+    const urlSubida = await uploadImage(imgBuffer);
+    const upscaledBuffer = await getUpscaledImage(urlSubida);
 
-    conn.reply(m.chat, '✧ Mejorando la calidad de la imagen....', m)
-    let imgBuffer = await q.download()
-    let image = await Jimp.read(imgBuffer)
-    image.resize(800, Jimp.AUTO)
-    let processedImageBuffer = await image.getBufferAsync(Jimp.MIME_JPEG)
-
-    let imageUrl = await uploadImage(processedImageBuffer)
-    let enhancedImageUrl = await enhanceImage(imageUrl)
-
-    await conn.sendFile(m.chat, enhancedImageUrl, "out.png", "", fkontak)
-  } catch (error) {
-    return conn.reply(m.chat, `⚠︎ Ocurrió un error: ${error.message}`, m)
+    await conn.sendFile(m.chat, upscaledBuffer, "upscaled.jpg", "*𝘼𝙦𝙪í 𝙩𝙞𝙚𝙣𝙚𝙨 𝙩𝙪 𝙞𝙢𝙖𝙜𝙚𝙣 𝙢𝙚𝙟𝙤𝙧𝙖𝙙𝙖*", m);
+    await m.react("✅");
+  } catch (e) {
+    console.error("Error:", e);
+    await m.react("✖️");
+    conn.reply(m.chat, "Ocurrió un error al mejorar la imagen.", m);
   }
-}
+};
 
-handler.help = ["hd"]
-handler.tags = ["tools"]
-handler.command = ["remini", "hd", "enhance"]
-handler.group = true
+handler.help = ["hd"]  
+handler.tags = ["tools"]  
+handler.command = ["remini", "hd", "enhance"]  
+handler.register = true
+export default handler;
 
-export default handler
-
-async function enhanceImage(imageUrl) {
-  try {
-    const response = await fetch(
-      `https://api.siputzx.my.id/api/iloveimg/upscale?image=${encodeURIComponent(imageUrl)}`,
-      {
-        method: "GET"
-      }
-    )
-
-    if (!response.ok) {
-      throw new Error(
-        `Error al procesar la imagen: ${response.status} - ${response.statusText}`
-      )
-    }
-
-    const result = await response.buffer()
-    return result
-  } catch (error) {
-    throw new Error(
-      `Error al mejorar la calidad de la imagen: ${error.message}`
-    )
-  }
+async function getUpscaledImage(imageUrl) {
+  const apiUrl = `https://api.siputzx.my.id/api/iloveimg/upscale?image=${encodeURIComponent(imageUrl)}`;
+  const response = await axios.get(apiUrl, { responseType: "arraybuffer" });
+  return Buffer.from(response.data);
 }

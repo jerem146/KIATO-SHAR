@@ -16,7 +16,7 @@ let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
 
 ᰔᩚ Neykoor 
 > 🜸 Rol » *Developer*
-> ✧ GitHub » https://github.com/neykoor/H.git
+> ✧ GitHub » https://github.com/Aqua200/Yu.git
 
 ᰔᩚ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜
 > 🜸 Rol » *Developer*

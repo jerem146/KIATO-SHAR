@@ -14,9 +14,9 @@ let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
 
 ❒ *Colaboradores:*
 
-ᰔᩚ 𝓔𝓶𝓶𝓪 𝓥𝓲𝓸𝓵𝓮𝓽𝓼 𝓥𝓮𝓻𝓼𝓲ó𝓷 
+ᰔᩚ Neykoor 
 > 🜸 Rol » *Developer*
-> ✧ GitHub » https://github.com/Elpapiema
+> ✧ GitHub » https://github.com/neykoor/H.git
 
 ᰔᩚ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜
 > 🜸 Rol » *Developer*

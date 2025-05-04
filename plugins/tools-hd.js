@@ -6,7 +6,7 @@ const handler = async (m, { conn }) => {
     const q = m.quoted || m;
     const mime = (q.msg || q).mimetype || q.mediaType || "";
 
-    if (!mime.startsWith("image/")) {
+    if (!mime || !mime.startsWith("image/")) {
       return conn.reply(m.chat, "✦ Responde a una *imagen* para mejorarla.", m);
     }
 
@@ -14,17 +14,20 @@ const handler = async (m, { conn }) => {
 
     const imgBuffer = await q.download?.();
     if (!imgBuffer) {
-      throw new Error("No se pudo descargar la imagen.");
+      await m.react("✖️");
+      return conn.reply(m.chat, "✦ No se pudo descargar la imagen. Intenta con otra.", m);
     }
 
     const imageUrl = await uploadImage(imgBuffer);
-    if (!imageUrl) {
-      throw new Error("No se pudo subir la imagen.");
+    if (!imageUrl || !imageUrl.startsWith("http")) {
+      await m.react("✖️");
+      return conn.reply(m.chat, "✦ No se pudo subir la imagen. Intenta más tarde.", m);
     }
 
     const upscaledImage = await getUpscaledImage(imageUrl);
-    if (!upscaledImage) {
-      throw new Error("No se pudo mejorar la imagen.");
+    if (!upscaledImage || upscaledImage.length < 500) {
+      await m.react("✖️");
+      return conn.reply(m.chat, "✦ La imagen mejorada no es válida. Intenta con otra.", m);
     }
 
     await conn.sendFile(m.chat, upscaledImage, "mejorada.jpg", "*✦ Aquí tienes tu imagen mejorada*", m);
@@ -43,9 +46,15 @@ handler.command = ["remini", "hd", "enhance"];
 handler.register = true;
 export default handler;
 
-// Función que envía la imagen al API de mejora
+// Función para mejorar imagen usando API
 async function getUpscaledImage(imageUrl) {
   const apiUrl = `https://api.siputzx.my.id/api/iloveimg/upscale?image=${encodeURIComponent(imageUrl)}`;
-  const { data } = await axios.get(apiUrl, { responseType: "arraybuffer" });
-  return Buffer.from(data);
+  const response = await axios.get(apiUrl, {
+    responseType: "arraybuffer",
+    timeout: 30000, // 30s por si el servidor tarda
+    headers: {
+      "User-Agent": "WhatsAppBot-Upscaler"
+    }
+  });
+  return Buffer.from(response.data);
 }

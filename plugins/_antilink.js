@@ -22,6 +22,7 @@ const isGroupLink = linkRegex.exec(m.text)
 
 const grupo = `https://chat.whatsapp.com`
 
+if (isAdmin && chat.antiLink && m.text.includes(grupo)) return conn.reply(m.chat, `🏷 *Hey!! el anti link esta activo pero eres admin, ¡salvado!*`, m, rcanal, )
 
 if (chat.antiLink && isGroupLink && !isAdmin) {
 
@@ -35,7 +36,7 @@ if (m.text.includes(linkThisGroup)) return !0
 
 await conn.reply(m.chat, `📎 *¡Enlace detectado!*\n\n*${await this.getName(m.sender)} mandaste un enlace prohibido por lo cual seras eliminado*`, m, rcanal, )
 
-if (!isBotAdmin) return conn.reply(m.chat, `🌼 *No soy administrador, no puedo eliminar intrusos*`, m, rcanal, )
+if (!isBotAdmin) return conn.reply(m.chat, `🌼 *No soy admin, no puedo eliminar intrusos*`, m, rcanal, )
 
 if (isBotAdmin) {
 

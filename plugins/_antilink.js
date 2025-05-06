@@ -35,7 +35,7 @@ if (m.text.includes(linkThisGroup)) return !0
 
 await conn.reply(m.chat, `📎 *¡Enlace detectado!*\n\n*${await this.getName(m.sender)} mandaste un enlace prohibido por lo cual seras eliminado*`, m, rcanal, )
 
-if (!isBotAdmin) return conn.reply(m.chat, `🌼 *No soy admin, no puedo eliminar intrusos*`, m, rcanal, )
+if (!isBotAdmin) return conn.reply(m.chat, `🌼 *No soy administrador, no puedo eliminar intrusos*`, m, rcanal, )
 
 if (isBotAdmin) {
 

@@ -17,7 +17,7 @@ async function handler(m, { conn: _envio }) {
 
   const botsActivos = Array.from(uniqueUsers.values()).slice(0, 10)
   const totalBots = uniqueUsers.size
-  const limite = 22
+  const limite = 21
   const leerMas = String.fromCharCode(8206).repeat(4001)
 
   let topBot = '╭─────⊷ *Bot con más tiempo activo*\n│ ⚠️ Ningún bot activo\n╰──────────────────'

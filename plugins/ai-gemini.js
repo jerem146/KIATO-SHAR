@@ -14,6 +14,6 @@ await conn.reply(m.chat, `${msm} Gemini no puede responder a esa pregunta.`, m)
 handler.command = ['gemini']
 handler.help = ['gemini']
 handler.tags = ['ai']
-handler.group = true
+handler.owner = true
 
 export default handler

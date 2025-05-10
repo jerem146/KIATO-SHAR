@@ -1,5 +1,5 @@
 {
-  "name": "DestinyBot-MD",
+  "name": "𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃-MD",
   "version": "1.2.0",
   "description": "Super WhatsApp Bot Multi Device",
   "main": "index.js",
@@ -24,10 +24,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "githttps://github.com/https0J/Destiny-Bot.git"
+    "url": ""
   },
   "bugs": {
-    "url": "https://github.com/https0J/Destiny-Bot/issues"
+    "url": ""
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {

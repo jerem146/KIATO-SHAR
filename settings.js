@@ -16,15 +16,15 @@ global.botNumber = '' //Ejemplo: 573218138672
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.owner = [
-  ['573154062343', ' Propietario ', true],
-  ['5212202410659', 'zorrita', true],
-  ['5216631079388', 'neykor', true],
+  ['584142577312', ' Propietario ', true],
+  ['584125014674', 'Jhon 2', true],
+  ['582129443583', 'El bot más bello', true],
 ];
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.mods = []
-global.suittag = ['573154062343'] 
+global.suittag = ['584142577312'] 
 global.prems = []
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
@@ -32,20 +32,20 @@ global.prems = []
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.16' 
 global.vs = '1.0.0'
-global.nameqr = '𝐃𝐞𝐬𝐭𝐢𝐧𝐲𝐁𝐨𝐭-MD'
-global.namebot = '✿◟𝐃𝐞𝐬𝐭𝐢𝐧𝐲-Bσƚ◞✿'
+global.nameqr = '𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃'
+global.namebot = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀'
 global.sessions = 'Sessions'
 global.jadi = 'JadiBots' 
 global.yukiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.packname = '⪛✰ 𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐛𝐨𝐭 ✰⪜'
-global.botname = '𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐛𝐨𝐭'
-global.wm = 'ৎ୭࠭͢𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐁𝐨𝐭ⷭ𓆪͟͞ '
-global.author = 'Made By https_(S2)'
-global.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ https_(S2)'
-global.textbot = '𝐃𝐞𝐬𝐭𝐢𝐧𝐲-𝐛𝐨𝐭 • Powered By https_(S2)'
+global.packname = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀'
+global.botname = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀'
+global.wm = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀'
+global.author = 'Made By 𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
+global.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ 𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
+global.textbot = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀 • Powered By 𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
 global.etiqueta = 'https_(S2)'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
@@ -53,7 +53,7 @@ global.etiqueta = 'https_(S2)'
 global.moneda = '¥enes'
 global.welcom1 = '❍ Edita Con El Comando setwelcome'
 global.welcom2 = '❍ Edita Con El Comando setbye'
-global.banner = 'https://files.catbox.moe/fycjd8.jpg'
+global.banner = 'https://files.catbox.moe/h5qqbi.jpeg'
 global.avatar = 'https://files.catbox.moe/pzn79l.jpg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*

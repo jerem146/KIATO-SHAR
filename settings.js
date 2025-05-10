@@ -46,7 +46,7 @@ global.wm = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀'
 global.author = 'Made By 𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
 global.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ 𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
 global.textbot = '𓂀𝔸𝕜𝕚𝕣𝕒-𝕓𝕠𝕥𓂀 • Powered By 𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
-global.etiqueta = 'https_(S2)'
+global.etiqueta = '𝚃𝚑𝚎𝙹𝚑𝚘𝚗'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
@@ -58,13 +58,13 @@ global.avatar = 'https://files.catbox.moe/3wpeoh.jpeg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.gp1 = 'https://chat.whatsapp.com/CDw7hpI30WjCyKFAVLHNhZ'
-global.comunidad1 = 'https://chat.whatsapp.com/Ekf7Ge36AthIUiCGIdRHR2'
-global.channel = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
-global.channel2 = 'https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n'
-global.md = 'https://github.com/https0J/Destiny-Bot'
-global.correo = 'https0johan@gmail.com'
-global.cn ='https://whatsapp.com/channel/0029Vb6AROo1noyzTUiHdh1n';
+global.gp1 = '
+global.comunidad1 = ''
+global.channel = ''
+global.channel2 = ''
+global.md = ''
+global.correo = ''
+global.cn ='';
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 

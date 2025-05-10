@@ -188,7 +188,7 @@ console.log(chalk.bold.white(chalk.bgMagenta(`❤️ CÓDIGO DE VINCULACIÓN ❤
 
 conn.isInit = false;
 conn.well = false;
-//conn.logger.info(`🐵  H E C H O\n`)
+//conn.logger.info(`🐵 H E C H O\n`)
 
 if (!opts['test']) {
 if (global.db) setInterval(async () => {
@@ -275,7 +275,12 @@ console.log(chalk.bold.yellowBright(`
 `));
 await global.reloadHandler(true).catch(console.error) //process.send('reset')
 } else {
-console.log(chalk.bold.redBright(`\n⚠︎！ RAZON DE DESCONEXIÓN DESCONOCIDA: ${reason || 'No encontrado'} >> ${connection || 'No encontrado'}`))
+console.log(chalk.bold.yellowBright(`
+╔═══[ ⚠︎ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | DESCONEXIÓN ]═══╗
+║ Motivo     : ${reason || 'No encontrado'}           
+║ Estado     : ${connection || 'No encontrado'}       
+╚════════════════════════════════════╝
+`));
 }}
 }
 process.on('uncaughtException', console.error)
@@ -452,12 +457,27 @@ unlinkSync(`./${jadi}/${directorio}/${fileInDir}`)
 }})
 }})
 if (SBprekey.length === 0) {
-console.log(chalk.bold.green(`\n╭» ❍ ${jadi} ❍\n│→ NADA POR ELIMINAR \n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻︎`))
+console.log(chalk.bold.green(`
+╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ELIMINACIÓN ]═══╗
+║❌ Usuario   : ${jadi || 'No encontrado'}            
+║➡️ Acción    : NADA POR ELIMINAR                   
+╚════════════════════════════════════════╝
+`));
 } else {
-console.log(chalk.bold.cyanBright(`\n╭» ❍ ${jadi} ❍\n│→ ARCHIVOS NO ESENCIALES ELIMINADOS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻︎︎`))
-}} catch (err) {
-console.log(chalk.bold.red(`\n╭» ❍ ${jadi} ❍\n│→ OCURRIÓ UN ERROR\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻\n` + err))
-}}
+console.log(chalk.bold.cyanBright(`
+╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ELIMINACIÓN ]═══╗
+║💾 Usuario   : ${jadi || 'No encontrado'}            
+║✅ Acción    : ARCHIVOS NO ESENCIALES ELIMINADOS                   
+╚════════════════════════════════════════╝
+`));
+} catch (err) {
+  console.log(chalk.bold.red(`
+╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ERROR ]═══╗
+║❗ Usuario   : ${jadi || 'No encontrado'}            
+║⚠️ Error     : OCURRIÓ UN ERROR                
+╚════════════════════════════════════════╝
+` + err));
+}
 
 function purgeOldFiles() {
 const directories = [`./${sessions}/`, `./${jadi}/`]
@@ -469,7 +489,12 @@ if (file !== 'creds.json') {
 const filePath = path.join(dir, file);
 unlinkSync(filePath, err => {
 if (err) {
-console.log(chalk.bold.red(`\n╭» ❍ ARCHIVO ❍\n│→ ${file} NO SE LOGRÓ BORRAR\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ✘\n` + err))
+console.log(chalk.bold.red(`
+╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ERROR AL BORRAR ]═══╗
+║❗ Archivo   : ${file || 'No encontrado'}            
+║🚫 Acción    : NO SE LOGRÓ BORRAR                     
+╚════════════════════════════════════════╝
+` + err));
 } else {
 console.log(chalk.bold.green(`\n╭» ❍ ARCHIVO ❍\n│→ ${file} BORRADO CON ÉXITO\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻`))
 } }) }

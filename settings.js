@@ -58,7 +58,7 @@ global.avatar = 'https://files.catbox.moe/3wpeoh.jpeg'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.gp1 = '
+global.gp1 = ''
 global.comunidad1 = ''
 global.channel = ''
 global.channel2 = ''

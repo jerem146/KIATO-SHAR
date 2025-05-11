@@ -41,15 +41,15 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 //let require = createRequire(megu)
 let { say } = cfonts
 
-console.log(chalk.bold.redBright(`\n✰ Iniciando Akirabot-MD'\n`))
+console.log(chalk.bold.redBright(`\n✰ Iniciando Destiny-Bot ✰\n`))
 
-say('Akirabot-MD', {
+say('DestinyBot-MD', {
 font: 'block',
 align: 'center',
 colors: ['magentaBright']
 })
 
-say(`Developed By • 𝚃𝚑𝚎𝙹𝚑𝚘𝚗`, {
+say(`Developed By • https_(S2)`, {
 font: 'console',
 align: 'center',
 colors: ['blueBright']
@@ -125,7 +125,7 @@ opcion = '1'
 }
 if (!methodCodeQR && !methodCode && !fs.existsSync(`./${sessions}/creds.json`)) {
 do {
-opcion = await question(colores('🐵 Seleccione una opción:\n') + opcionQR('1. Con código QR\n') + opcionTexto('2. Con código de texto de 8 dígitos\n--> '))
+opcion = await question(colores('⌨ Seleccione una opción:\n') + opcionQR('1. Con código QR\n') + opcionTexto('2. Con código de texto de 8 dígitos\n--> '))
 
 if (!/^[1-2]$/.test(opcion)) {
 console.log(chalk.bold.redBright(`✦ No se permiten numeros que no sean 1 o 2, tampoco letras o símbolos especiales.`))
@@ -170,7 +170,7 @@ if (!!phoneNumber) {
 addNumber = phoneNumber.replace(/[^0-9]/g, '')
 } else {
 do {
-phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`✦ Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright(`✏ Ejemplo: 58412×××××××`)}\n${chalk.bold.magentaBright('---> ')}`)))
+phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`✦ Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright(`✏  Ejemplo: 57321×××××××`)}\n${chalk.bold.magentaBright('---> ')}`)))
 phoneNumber = phoneNumber.replace(/\D/g,'')
 if (!phoneNumber.startsWith('+')) {
 phoneNumber = `+${phoneNumber}`
@@ -181,14 +181,14 @@ addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`❤️ CÓDIGO DE VINCULACIÓN ❤️`)), chalk.bold.white(chalk.white(codeBot)))
+console.log(chalk.bold.white(chalk.bgMagenta(`✧ CÓDIGO DE VINCULACIÓN ✧`)), chalk.bold.white(chalk.white(codeBot)))
 }, 2000)
 }}}
 }
 
 conn.isInit = false;
 conn.well = false;
-//conn.logger.info(`🐵 H E C H O\n`)
+//conn.logger.info(`✦  H E C H O\n`)
 
 if (!opts['test']) {
 if (global.db) setInterval(async () => {
@@ -214,73 +214,31 @@ if (opcion == '1' || methodCodeQR) {
 console.log(chalk.bold.yellow(`\n❐ ESCANEA EL CÓDIGO QR EXPIRA EN 45 SEGUNDOS`))}
 }
 if (connection == 'open') {
-console.log(chalk.bold.green('\n❀ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 Conectada con éxito 🐵'))
+console.log(chalk.bold.green('\n❀ 𝐃𝐞𝐬𝐭𝐢𝐧𝐲𝐁𝐨𝐭-MD Conectada con éxito ❀'))
 }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {
 if (reason === DisconnectReason.badSession) {
 console.log(chalk.bold.cyanBright(`\n⚠︎ SIN CONEXIÓN, BORRE LA CARPETA ${global.sessions} Y ESCANEA EL CÓDIGO QR ⚠︎`))
 } else if (reason === DisconnectReason.connectionClosed) {
-console.log(chalk.bold.magentaBright(`
-╔═╦══════════════════════════════════════╦═╗
-║⚡║         CONEXIÓN FINALIZADA         ║⚡║
-╠═╬══════════════════════════════════════╬═╣
-║❌ Motivo   : Desconexión inesperada       ║
-║⏳ Acción   : Reconectando automáticamente ║
-╚═╩══════════════════════════════════════╩═╝
-`));
+console.log(chalk.bold.magentaBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ☹\n┆ ⚠︎ CONEXION CERRADA, RECONECTANDO....\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ☹`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.connectionLost) {
-console.log(chalk.bold.blueBright(`
-╔═╦═════════════════════════════════════════════════════╦═╗
-║☂║   𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 ▸ CONEXIÓN PERDIDA CON EL SERVIDOR   ║☂║
-╠═╬═════════════════════════════════════════════════════╬═╣
-║⚠︎ Estado   : Conexión interrumpida                     ║
-║⏳ Acción   : Reintentando conexión automáticamente...  ║
-╚═╩═════════════════════════════════════════════════════╩═╝
-`));
+console.log(chalk.bold.blueBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ☂\n┆ ⚠︎ CONEXIÓN PERDIDA CON EL SERVIDOR, RECONECTANDO....\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ☂`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.bold.yellowBright(`
-╔═╦════════════════════════════════════════════════════════════╦═╗
-║✗║  𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 ▸ CONEXIÓN REEMPLAZADA                      ║✗║
-╠═╬════════════════════════════════════════════════════════════╬═╣
-║⚠︎ Estado   : Se abrió una nueva sesión                        ║
-║🔐 Acción   : Cierra esta sesión antes de continuar            ║
-╚═╩════════════════════════════════════════════════════════════╩═╝
-`));
+console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✗\n┆ ⚠︎ CONEXIÓN REEMPLAZADA, SE HA ABIERTO OTRA NUEVA SESION, POR FAVOR, CIERRA LA SESIÓN ACTUAL PRIMERO.\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✗`))
 } else if (reason === DisconnectReason.loggedOut) {
-console.log(chalk.bold.redBright(`
-╔═╦════════════════════════════════════════════════════════════╦═╗
-║⚠︎║          𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 ▸ SIN CONEXIÓN                        ║⚠︎║
-╠═╬════════════════════════════════════════════════════════════╬═╣
-║🗂 Carpeta   : ${global.sessions}                              
-║📲 Acción    : Borra la carpeta y escanea el código QR       
-╚═╩════════════════════════════════════════════════════════════╩═╝
-`));
+console.log(chalk.bold.redBright(`\n⚠︎ SIN CONEXIÓN, BORRE LA CARPETA ${global.sessions} Y ESCANEA EL CÓDIGO QR ⚠︎`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.bold.cyanBright(`
-╔═╦══════════════════════════════════════════════╦═╗
-║⏳║        𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 ▸ CONECTANDO AL SERVIDOR...    ║⏳║
-╚═╩══════════════════════════════════════════════╩═╝
-`));
+console.log(chalk.bold.cyanBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✓\n┆ ✧ CONECTANDO AL SERVIDOR...\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ✓`))
 await global.reloadHandler(true).catch(console.error)
 } else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.bold.yellowBright(`
-╔═╦══════════════════════════════════════════════╦═╗
-║⧖║     𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 ▸ TIEMPO DE CONEXIÓN AGOTADO      ║⧖║
-║🔄║             Intentando reconectar...             ║🔄║
-╚═╩══════════════════════════════════════════════╩═╝
-`));
+console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ▸\n┆ ⧖ TIEMPO DE CONEXIÓN AGOTADO, RECONECTANDO....\n╰┄┄┄┄┄┄┄┄┄┄┄┄┄┄ • • • ┄┄┄┄┄┄┄┄┄┄┄┄┄┄ ▸`))
 await global.reloadHandler(true).catch(console.error) //process.send('reset')
 } else {
-console.log(chalk.bold.yellowBright(`
-╔═══[ ⚠︎ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | DESCONEXIÓN ]═══╗
-║ Motivo     : ${reason || 'No encontrado'}           
-║ Estado     : ${connection || 'No encontrado'}       
-╚════════════════════════════════════╝
-`));
+console.log(chalk.bold.redBright(`\n⚠︎！ RAZON DE DESCONEXIÓN DESCONOCIDA: ${reason || 'No encontrado'} >> ${connection || 'No encontrado'}`))
 }}
 }
 process.on('uncaughtException', console.error)
@@ -457,28 +415,12 @@ unlinkSync(`./${jadi}/${directorio}/${fileInDir}`)
 }})
 }})
 if (SBprekey.length === 0) {
-console.log(chalk.bold.green(`
-╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ELIMINACIÓN ]═══╗
-║❌ Usuario   : ${jadi || 'No encontrado'}            
-║➡️ Acción    : NADA POR ELIMINAR                   
-╚════════════════════════════════════════╝
-`));
+console.log(chalk.bold.green(`\n╭» ❍ ${jadi} ❍\n│→ NADA POR ELIMINAR \n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻︎`))
 } else {
-console.log(chalk.bold.cyanBright(`
-╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ELIMINACIÓN ]═══╗
-║💾 Usuario   : ${jadi || 'No encontrado'}            
-║✅ Acción    : ARCHIVOS NO ESENCIALES ELIMINADOS                   
-╚════════════════════════════════════════╝
-`));
-try {
-} catch (err) {
-  console.log(chalk.bold.red(`
-╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ERROR ]═══╗
-║❗ Usuario   : ${jadi || 'No encontrado'}            
-║⚠️ Error     : OCURRIÓ UN ERROR                
-╚════════════════════════════════════════╝
-` + err));
-}
+console.log(chalk.bold.cyanBright(`\n╭» ❍ ${jadi} ❍\n│→ ARCHIVOS NO ESENCIALES ELIMINADOS\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻︎︎`))
+}} catch (err) {
+console.log(chalk.bold.red(`\n╭» ❍ ${jadi} ❍\n│→ OCURRIÓ UN ERROR\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻\n` + err))
+}}
 
 function purgeOldFiles() {
 const directories = [`./${sessions}/`, `./${jadi}/`]
@@ -490,12 +432,7 @@ if (file !== 'creds.json') {
 const filePath = path.join(dir, file);
 unlinkSync(filePath, err => {
 if (err) {
-console.log(chalk.bold.red(`
-╔═══[ ❍ 𝐀𝐤𝐢𝐫𝐚𝐛𝐨𝐭-𝐌𝐃 | ERROR AL BORRAR ]═══╗
-║❗ Archivo   : ${file || 'No encontrado'}            
-║🚫 Acción    : NO SE LOGRÓ BORRAR                     
-╚════════════════════════════════════════╝
-` + err));
+console.log(chalk.bold.red(`\n╭» ❍ ARCHIVO ❍\n│→ ${file} NO SE LOGRÓ BORRAR\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ✘\n` + err))
 } else {
 console.log(chalk.bold.green(`\n╭» ❍ ARCHIVO ❍\n│→ ${file} BORRADO CON ÉXITO\n╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻`))
 } }) }

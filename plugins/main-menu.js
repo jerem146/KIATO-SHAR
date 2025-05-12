@@ -612,7 +612,7 @@ let txt = `
               newsletterName: channelRD.name,
               serverMessageId: -1,
           },
-                    forwardingScore: 999,
+          forwardingScore: 999,
           externalAdReply: {
               title: botname,
               body: textbot,

@@ -8,19 +8,13 @@ let handler = async (m, { conn, args }) => {
     let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     
     let txt = `
-🌟 ¡Bienvenido a *${botname}*! 🌟
-
-╭━━━〔 𝑴𝑬𝑵𝑼 𝑫𝑬 𝑪𝑶𝑴𝑨𝑵𝑫𝑶𝑺 〕━━━╮
-┃ 👤 𝐔𝐬𝐮𝐚𝐫𝐢𝐨: @${userId.split('@')[0]}
-┃ 🚦 𝐄𝐬𝐭𝐚𝐝𝐨: ${conn.user.jid == global.conn.user.jid ? 'Bot Principal 🦾' : 'Sub-Bot 🤖'}
-┃ 🕰️ 𝐓𝐢𝐞𝐦𝐩𝐨 𝐄𝐧𝐜𝐢𝐧𝐝𝐢𝐝𝐨: ${uptime}
-┃ 👥 𝐔𝐬𝐮𝐚𝐫𝐢𝐨𝐬 𝐑𝐞𝐠𝐢𝐬𝐭𝐫𝐚𝐝𝐨𝐬: ${totalreg}
-┃ 🛠️ 𝐂𝐨𝐦𝐚𝐧𝐝𝐨𝐬 𝐃𝐢𝐬𝐩𝐨𝐧𝐢𝐛𝐥𝐞𝐬: ${totalCommands}
-┃ 🛰️ 𝐒𝐞𝐫𝐯𝐢𝐝𝐨𝐫: Multi Device
-╰━━━━━━━━━━━━━━━━━━━━━━━╯
-
-✨ Crea tu propio *Sub-Bot* y conviértete en administrador usando:
-🔑 *#qr* o *#code*
+const menu = `🌟 ¡Bienvenido a *${botname}*! 🌟
+╭━━〔 𝑴𝑬𝑵𝑼 𝑫𝑬 𝑪𝑶𝑴𝑨𝑵𝑫𝑶𝑺 〕━━╮
+┃ 👤 Usuario: @${userId.split('@')[0]} ┃ 🚦 Estado: ${conn.user.jid == global.conn.user.jid ? 'Bot Principal 🦾' : 'Sub-Bot 🤖'}
+┃ 🕰️ Uptime: ${uptime} ┃ 👥 Usuarios: ${totalreg}
+┃ 🛠️ Cmds: ${totalCommands} ┃ 🛰️ Servidor: Multi Device
+╰━━━━━━━━━━━━━━━━━━━━━╯
+😁 Crea tu *Sub-Bot*: ${prefix}serbot (¡Sé bot!)
 
 • :･ﾟ⊹˚• \`『 Info-Bot 』\` •˚⊹:･ﾟ•
 

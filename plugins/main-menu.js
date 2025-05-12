@@ -10,7 +10,7 @@ let handler = async (m, { conn, args }) => {
     let txt = `
 ╭─〔 𝗠𝗘𝗡𝗨 𝗗𝗘 𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦 〕─╮
 ┃ 👤 Usuario : @${userId.split('@')[0]}
-┃ 🚦 Estado  : ${conn.user.jid == ┃global.conn.user.jid ? 'Bot Principal 🦾' : ┃'Sub-Bot 🤖'}
+┃ 🚦 Estado  : ${{conn.user.jid == ┃global.conn.user.jid ? 'Bot Principal 🦾' : ┃'Sub-Bot 🤖'}}
 ┃ 🕰️ Uptime  : ${uptime}
 ┃ 👥 Usuarios: ${totalreg}
 ┃ 🛠️ Cmds    : ${totalCommands}

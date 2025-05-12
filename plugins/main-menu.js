@@ -10,7 +10,7 @@ let handler = async (m, { conn, args }) => {
 let txt = `
 ╭─〔 𝗠𝗘𝗡𝗨 𝗗𝗘 𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦 〕─╮
 ┃ 👤 Usuario : @${userId.split('@')[0]}
-┃ 🚦 Estado  : ${conn.user.jid == global.conn.user.jid ? 'Bot Principal 🦾' : 'Sub-Bot 🤖'}
+┃ 🚦 Estado  : ${conn.user.jid == ┃global.conn.user.jid ? 'Bot Principal 🦾' : ┃'Sub-Bot 🤖'}
 ┃ 🕰️ Uptime  : ${uptime}
 ┃ 👥 Usuarios: ${totalreg}
 ┃ 🛠️ Cmds    : ${totalCommands}
@@ -179,7 +179,7 @@ let txt = `
 ┃ ⌘ *#transfer • #pay*  
 ┃ ➤ ✦ Transfiere ${moneda} o XP a otros ┃usuarios.
 ┃ ⌘ *#miming • #minar • #mine*  
-┃ ➤ ✦ Trabaja como minero y recolecta recursos.
+┃ ➤ ✦ Trabaja como minero y recolecta ┃recursos.
 ┃ ⌘ *#buyall • #buy*  
 ┃ ➤ ✦ Compra ${moneda} con tu XP.
 ┃ ⌘ *#daily • #diario*  
@@ -280,7 +280,7 @@ let txt = `
 ┃ ⌘ *#read • #readviewonce • #ver*  
 ┃ ➤ ✦ Ver imágenes de una sola vista.
 ┃ ⌘ *#whatmusic • #shazam*  
-┃ ➤ ✦ Descubre el nombre de canciones o vídeos.
+┃ ➤ ✦ Descubre el nombre de canciones o ┃vídeos.
 ┃ ⌘ *#spamwa • #spam*  
 ┃ ➤ ✦ Envía spam a un usuario.
 ┃ ⌘ *#ss • #ssweb*  
@@ -598,7 +598,7 @@ let txt = `
 ┃ ⌘ *#pvp • #suit* + <mención>  
 ┃ ➤ ✦ Juega un PVP contra otro usuario.
 ┃ ⌘ *#ttt*  
-┃ ➤ ✦ Juega el clásico juego de tres en línea  (tic tac toe).
+┃ ➤ ✦ Juega el clásico juego de tres en línea  ┃(tic tac toe).
 ╰────────────────────╯
   `.trim()
 

@@ -1,6 +1,6 @@
 import { areJidsSameUser } from '@whiskeysockets/baileys';
 
-console.log('Comando peru cargado correctamente');
+console.log('Comando cargado exitosamente, usa el bot bebe🫦');
 
 const handler = async (m, { conn, text, command }) => {
   await conn.reply(m.chat, 'ay mi gatito miau miau miau', m);

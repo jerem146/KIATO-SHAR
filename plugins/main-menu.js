@@ -617,7 +617,7 @@ let txt = `
               title: botname,
               body: textbot,
               thumbnailUrl: banner,
-              sourceUrl: redes,
+              sourceUrl: 'https://chat.whatsapp.com/CsXWv9AG7pr88urR4wRt6P',
               mediaType: 1,
               showAdAttribution: true,
               renderLargerThumbnail: true,

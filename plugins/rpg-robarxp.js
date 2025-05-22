@@ -28,7 +28,7 @@ handler.help = ['rob'];
 handler.tags = ['economy'];
 handler.command = ['robxp', 'robarxp'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 function msToTime(duration) {

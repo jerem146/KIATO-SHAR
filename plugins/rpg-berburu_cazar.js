@@ -94,7 +94,7 @@ handler.help = ['berburu'];
 handler.tags = ['rpg'];
 handler.command = ['cazar', 'hunt', 'berburu']
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 

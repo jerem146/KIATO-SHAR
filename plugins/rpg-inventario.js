@@ -40,6 +40,6 @@ handler.help = ['inventario', 'inv'];
 handler.tags = ['rpg'];
 handler.command = ['inventario', 'inv']; 
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

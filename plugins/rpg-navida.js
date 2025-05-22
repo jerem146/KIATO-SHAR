@@ -42,7 +42,7 @@ handler.help = ['navidad', 'christmas'];
 handler.tags = ['rpg'];
 handler.command = ['navidad', 'christmas'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 

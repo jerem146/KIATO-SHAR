@@ -66,7 +66,7 @@ let handler = async (m, { conn }) => {
 handler.tags = ['rpg'];
 handler.help = ['gremio'];
 handler.command = ['gremio', 'mision'];
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

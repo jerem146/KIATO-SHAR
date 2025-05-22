@@ -130,6 +130,6 @@ handler.help = ["morse"].map(v => v + " *<encode|decode>*")
 handler.tags = ["fun"]
 handler.command = ['morse']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler

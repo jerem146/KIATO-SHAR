@@ -166,6 +166,6 @@ handler.help = ['sopa', 'buscarpalabras'];
  handler.tags = ['game']; 
 handler.command = ['wordfind', 'wordsearch', 'soup', 'sopa', 'buscarpalabra']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler

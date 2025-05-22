@@ -34,6 +34,6 @@ handler.help = ['cal *<ecuacion>*']
 handler.tags = ['tools']
 handler.command = ['cal', 'calc', 'calcular', 'calculadora'] 
 handler.exp = 5
-handler.register = true 
+handler.register = false 
 
 export default handler

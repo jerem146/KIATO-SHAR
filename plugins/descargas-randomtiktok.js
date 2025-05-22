@@ -22,7 +22,7 @@ handler.tags = ['descargas']
 handler.command = ['ttrandom', 'tiktokrandom']
 handler.limit = true 
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.coin = 2;
 
 export default handler

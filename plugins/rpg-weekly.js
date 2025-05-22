@@ -29,7 +29,7 @@ handler.help = ['weekly'];
 handler.tags = ['rpg'];
 handler.command = ['semanal', 'weekly'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 

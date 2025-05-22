@@ -8,6 +8,6 @@ handler.help = ['delttt']
 handler.tags = ['game']
 handler.command = ['delttc', 'delttt', 'delxo','tictactoe']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler

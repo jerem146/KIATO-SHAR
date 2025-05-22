@@ -42,7 +42,7 @@ handler.help = ['gitclone *<url git>*']
 handler.tags = ['descargas']
 handler.command = ['gitclone']
 handler.group = true
-handler.register = true
+handler.register = false
 handler.coin = 3
 
 export default handler

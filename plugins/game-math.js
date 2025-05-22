@@ -29,7 +29,7 @@ handler.help = ['math <mode>'];
 handler.tags = ['game'];
 handler.command = ['matemáticas', 'mates', 'math']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler;
 

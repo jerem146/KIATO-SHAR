@@ -67,6 +67,6 @@ handler.help = ['ppt'];
 handler.tags = ['games'];
 handler.command = ['ppt'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

@@ -116,6 +116,6 @@ handler.help = ['vote <nombre>'];
 handler.tags = ['anime'];
 handler.command = ['vote', 'votar'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

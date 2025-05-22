@@ -32,6 +32,6 @@ handler.help = ['canjear <código>'];
 handler.tags = ['economia'];
 handler.command = ['canjear'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

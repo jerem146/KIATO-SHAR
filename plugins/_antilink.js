@@ -31,7 +31,7 @@ export async function execute(m, { conn, isAdmin, isBotAdmin }) {
     let chat = global.db.data.chats[m.chat] || {};
     if (args[0].toLowerCase() === 'on') {
       chat.antilink = true;
-      chat.linkAdvertir = false; // desactivar advertencias
+      chat.linkAdvertir = false;
       global.db.data.chats[m.chat] = chat;
       await conn.reply(m.chat, '⚠️ Eliminación automática de links *activada*.', m);
     } else {
@@ -48,7 +48,7 @@ export async function execute(m, { conn, isAdmin, isBotAdmin }) {
     let chat = global.db.data.chats[m.chat] || {};
     if (args[1].toLowerCase() === 'on') {
       chat.linkAdvertir = true;
-      chat.antilink = false; // desactivar eliminación
+      chat.antilink = false;
       global.db.data.chats[m.chat] = chat;
       await conn.reply(m.chat, '⚠️ Advertencias por links *activadas*.', m);
     } else {
@@ -59,7 +59,7 @@ export async function execute(m, { conn, isAdmin, isBotAdmin }) {
   }
 }
 
-export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner, participants }) {
+export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner }) {
   if (!m.isGroup) return;
   if (isAdmin || isOwner || m.fromMe || isROwner) return;
 
@@ -78,10 +78,14 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner, 
   }
 
   if (chat.antilink) {
-    if (isBotAdmin) {
+    try {
+      // Eliminar el mensaje con link
       await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant } });
+      // Avisar al grupo
+      await conn.sendMessage(m.chat, { text: `⚠️ ${userMention}, no está permitido enviar enlaces aquí.`, mentions: [userId] });
+    } catch (e) {
+      console.error('Error eliminando mensaje antilink:', e);
     }
-    await conn.sendMessage(m.chat, { text: `⚠️ ${userMention}, no está permitido enviar enlaces aquí.`, mentions: [userId] });
   } else if (chat.linkAdvertir) {
     global.db.data.users = global.db.data.users || {};
     global.db.data.users[userId] = global.db.data.users[userId] || {};

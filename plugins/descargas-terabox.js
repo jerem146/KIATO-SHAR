@@ -38,7 +38,7 @@ handler.help = ["terabox *<url>*"];
 handler.tags = ["dl"];
 handler.command = ['terabox', 'tb'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.coin = 5;
 
 export default handler;

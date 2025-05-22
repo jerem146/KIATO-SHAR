@@ -28,7 +28,7 @@ handler.help = ['pay'];
 handler.tags = ['rpg'];
 handler.command = ['pay', 'transfer'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 

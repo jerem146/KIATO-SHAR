@@ -25,7 +25,7 @@ Signo zodical : ${zodiac}
 handler.help = ['zodiac *2002 02 25*']
 handler.tags = ['fun']
 handler.group = true;
-handler.register = true
+handler.register = false
 handler.command = ['zodia','zodiac']
 
 export default handler

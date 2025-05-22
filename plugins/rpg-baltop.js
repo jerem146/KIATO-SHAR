@@ -21,7 +21,7 @@ handler.help = ['baltop'];
 handler.tags = ['rpg'];
 handler.command = ['baltop', 'eboard'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.fail = null;
 handler.exp = 0;
 

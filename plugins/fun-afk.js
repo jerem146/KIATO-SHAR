@@ -9,6 +9,6 @@ handler.help = ['afk [alasan]'];
 handler.tags = ['main'];
 handler.command = ['afk'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

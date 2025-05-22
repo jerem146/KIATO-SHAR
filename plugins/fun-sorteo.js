@@ -28,7 +28,7 @@ handler.help = ['sorteo']
 handler.command = ['sorteo']
 handler.tags = ['fun']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler
 

@@ -56,6 +56,6 @@ handler.help = ['charinfo <nombre del personaje>', 'winfo <nombre del personaje>
 handler.tags = ['anime'];
 handler.command = ['charinfo', 'winfo', 'waifuinfo'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

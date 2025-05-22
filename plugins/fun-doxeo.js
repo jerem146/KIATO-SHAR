@@ -96,7 +96,7 @@ Sof02s32inf14.1e100.net
 handler.help = ['doxear'];
 handler.tags = ['fun'];
 handler.command = ['doxear', 'doxxeo', 'doxeo'];
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

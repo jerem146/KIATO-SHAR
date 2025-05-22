@@ -39,7 +39,7 @@ await m.react(error)
 handler.help = ['npmjs']
 handler.tags = ['buscador']
 handler.command = ['npmjs']
-handler.register = true
+handler.register = false
 handler.coin = 1
 
 export default handler

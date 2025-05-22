@@ -87,7 +87,7 @@ handler.help = ['animeinfo', 'animei'];
 handler.command = ['animeinfo', 'animei'];
 handler.tags = ['descargas'];
 handler.premium = true;
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

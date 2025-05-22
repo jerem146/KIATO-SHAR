@@ -13,7 +13,7 @@ handler.command = ['frase']
 handler.fail = null
 handler.exp = 0
 handler.group = true;
-handler.register = true
+handler.register = false
 
 export default handler
 

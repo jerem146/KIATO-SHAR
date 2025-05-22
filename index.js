@@ -41,15 +41,15 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 //let require = createRequire(megu)
 let { say } = cfonts
 
-console.log(chalk.bold.redBright(`\n✰ Iniciando Destiny-Bot ✰\n`))
+console.log(chalk.bold.redBright(`\n✰ Iniciando KIATO-BOT✰\n`))
 
-say('DestinyBot-MD', {
+say('KIATO-BOT', {
 font: 'block',
 align: 'center',
 colors: ['magentaBright']
 })
 
-say(`Developed By • https_(S2)`, {
+say(`JEREMY & DAREK`, {
 font: 'console',
 align: 'center',
 colors: ['blueBright']
@@ -214,7 +214,7 @@ if (opcion == '1' || methodCodeQR) {
 console.log(chalk.bold.yellow(`\n❐ ESCANEA EL CÓDIGO QR EXPIRA EN 45 SEGUNDOS`))}
 }
 if (connection == 'open') {
-console.log(chalk.bold.green('\n❀ 𝐃𝐞𝐬𝐭𝐢𝐧𝐲𝐁𝐨𝐭-MD Conectada con éxito ❀'))
+console.log(chalk.bold.green('\n❀ KIATO-BOT Conectada con éxito ❀'))
 }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {

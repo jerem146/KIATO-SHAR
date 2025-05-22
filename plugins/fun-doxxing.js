@@ -38,7 +38,7 @@ handler.help = ['doxxing <nombre> | <@tag>'];
 handler.tags = ['fun'];
 handler.command = ['doxxing']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler;
 

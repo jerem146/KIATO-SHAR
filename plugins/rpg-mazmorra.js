@@ -60,7 +60,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 handler.tags = ['rpg'];
 handler.help = ['explorar'];
 handler.command = ['dungeon', 'mazmorra', 'cueva'];
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

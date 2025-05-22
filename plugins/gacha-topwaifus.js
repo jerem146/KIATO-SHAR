@@ -43,6 +43,6 @@ handler.help = ['topwaifus [página]'];
 handler.tags = ['anime'];
 handler.command = ['topwaifus', 'waifustop', 'waifusboard'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

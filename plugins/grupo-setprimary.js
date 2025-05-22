@@ -42,7 +42,7 @@ handler.help = ['set']
 handler.command = ['set']
 handler.group = true
 handler.owner = true
-handler.register = true
+handler.register = false
 handler.tags = ['grupo']
 
 export default handler;

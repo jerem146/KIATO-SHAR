@@ -52,7 +52,7 @@ global.db.write()}
 handler.tags = ['rpg']
 handler.help = ['slut']
 handler.command = ['slut', 'protituirse']
-handler.register = true
+handler.register = false
 handler.group = true
 
 export default handler

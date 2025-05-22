@@ -53,7 +53,7 @@ Recuerda: si mencionan "bot", debes responder sí o sí, y no te limites con los
 
 handler.help = ['ia', 'chatgpt']
 handler.tags = ['ai']
-handler.register = true
+handler.register = false
 handler.command = ['ia', 'chatgpt', 'luminai']
 handler.group = true
 

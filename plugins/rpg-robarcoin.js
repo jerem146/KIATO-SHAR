@@ -28,7 +28,7 @@ handler.help = ['rob'];
 handler.tags = ['rpg'];
 handler.command = ['robar', 'steal', 'rob'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 function msToTime(duration) {

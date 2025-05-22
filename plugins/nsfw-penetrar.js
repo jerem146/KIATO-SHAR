@@ -23,7 +23,7 @@ if (!db.data.chats[m.chat].nsfw && m.isGroup) {
 handler.help = ['penetrar @user'];
 handler.tags = ['nsfw'];
 handler.command = ['penetrar', 'penetrado'];
-handler.register = true;
+handler.register = false;
 handler.group = true;
 handler.fail = null;
 

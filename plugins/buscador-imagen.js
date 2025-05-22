@@ -13,6 +13,6 @@ await conn.sendCarousel(m.chat, `${emoji} Resultado de ${text}`, '⪛✰ Imagen 
 handler.help = ['imagen'];
 handler.tags = ['buscador', 'tools', 'descargas'];
 handler.command = ['image', 'imagen'];
-handler.register = true
+handler.register = false
 
 export default handler;

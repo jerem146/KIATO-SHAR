@@ -71,7 +71,7 @@ ${x[2]} : ${y[2]} : ${z[2]}
 handler.help = ['slot <apuesta>'];
 handler.tags = ['economy'];
 handler.group = true;
-handler.register = true
+handler.register = false
 handler.command = ['slot'];
 export default handler;
 

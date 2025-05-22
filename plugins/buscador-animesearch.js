@@ -67,7 +67,7 @@ handler.help = ['animes', 'animesearch', 'animess'];
 handler.command = ['animes', 'animesearch', 'animess'];
 handler.tags = ['buscador'];
 handler.premium = true;
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

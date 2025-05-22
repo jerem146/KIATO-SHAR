@@ -36,6 +36,6 @@ handler.help = ['nombreninja *<texto>*']
 handler.tags = ['fun']
 handler.command = ['nombreninja']
 handler.group = true;
-handler.register = true
+handler.register = false
 
 export default handler

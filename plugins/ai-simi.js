@@ -16,7 +16,7 @@ throw `${msm} Ocurrió un error.`;
 handler.help = ['simi', 'bot'];
 handler.tags = ['fun'];
 handler.group = true;
-handler.register = true
+handler.register = false
 handler.command = ['destiny', 'Destiny']
 
 export default handler;

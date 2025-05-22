@@ -71,7 +71,7 @@ renderLargerThumbnail: true
 handler.help = ['configuraciongrupo'];
 handler.tags = ['grupo'];
 handler.command = ['config', 'opciones', 'nable'];
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

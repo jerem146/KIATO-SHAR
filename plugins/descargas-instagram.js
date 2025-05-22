@@ -24,7 +24,7 @@ handler.command = ['instagram', 'ig'];
 handler.tags = ['descargas'];
 handler.help = ['instagram', 'ig'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.coin = 2;
 
 export default handler;

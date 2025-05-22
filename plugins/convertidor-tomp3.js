@@ -24,6 +24,6 @@ const handler = async (m, {conn, usedPrefix, command}) => {
 handler.help = ['tomp3', 'toaudio'];
 handler.command = ['tomp3', 'toaudio'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

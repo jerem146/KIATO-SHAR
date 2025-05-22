@@ -35,7 +35,7 @@ handler.help = ['monthly'];
 handler.tags = ['rpg'];
 handler.command = ['mensual', 'monthly'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 

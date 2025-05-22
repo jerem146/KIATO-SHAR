@@ -65,7 +65,7 @@ handler.help = ['aventura', 'adventure'];
 handler.tags = ['rpg'];
 handler.command = ['adventure', 'aventura'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.cooldown = 1500000;
 
 export default handler;

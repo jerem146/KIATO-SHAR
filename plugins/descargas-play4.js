@@ -79,6 +79,6 @@ const waitForDownload = async (id) => {
 handler.help = ['play4'];
 handler.command = ['play4'];
 handler.tags = ['música'];
-handler.register = true;
+handler.register = false;
 
 export default handler;

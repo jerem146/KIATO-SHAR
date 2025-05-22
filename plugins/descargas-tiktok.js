@@ -30,7 +30,7 @@ handler.help = ['tiktok'].map((v) => v + ' *<link>*');
 handler.tags = ['descargas'];
 handler.command = ['tiktok', 'tt'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.coin = 2;
 handler.limit = true;
 

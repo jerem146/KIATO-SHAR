@@ -48,7 +48,7 @@ handler.help = ['gdrive'];
 handler.tags = ['descargas'];
 handler.command = ['gdrive', 'drive'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 handler.coin = 5;
 
 export default handler;

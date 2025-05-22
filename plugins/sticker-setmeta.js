@@ -48,7 +48,7 @@ let handler = async (m, { text, usedPrefix, command }) => {
 handler.help = ['setmeta', 'delmeta']
 handler.tags = ['tools']
 handler.command = ['setmeta', 'delmeta']
-handler.register = true
+handler.register = false
 handler.group = true
 
 export default handler;

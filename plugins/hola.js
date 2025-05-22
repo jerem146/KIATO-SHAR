@@ -3,7 +3,7 @@ export default {
   description: 'Saluda, dice el nombre del bot y el nombre del dueño',
   async handler(m, { conn }) {
     // Nombre del bot
-    const botName = conn.user.name || 'Akira-bot-MD'
+    const botName = conn.user.name || 'KIATO-BOT'
     // Buscar el nombre del dueño desde la configuración global
     let ownerName = 'Desconocido'
     if (global.owner && global.owner.length > 0) {

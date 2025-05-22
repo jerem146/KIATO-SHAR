@@ -67,7 +67,7 @@ let handler = async (m, { conn }) => {
 handler.help = ['level', 'lvl'];
 handler.tags = ['rpg'];
 handler.command = ['nivel', 'lvl', 'level'];
-handler.register = true;
+handler.register = false;
 handler.group = true;
 
 export default handler;

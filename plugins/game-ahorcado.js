@@ -96,6 +96,6 @@ handler.help = ['ahorcado']
 handler.tags = ['game']
 handler.command = ['ahorcado']
 handler.group = true
-handler.register = true
+handler.register = false
 
 export default handler

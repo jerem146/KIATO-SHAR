@@ -40,6 +40,6 @@ handler.help = ['cf'];
 handler.tags = ['economy'];
 handler.command = ['cf', 'suerte', 'caracruz'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

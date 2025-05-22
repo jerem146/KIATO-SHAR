@@ -9,6 +9,6 @@ handler.tags = ['fun']
 handler.command = ['meme', 'memes']
 handler.coin = 1
 handler.group = true;
-handler.register = true
+handler.register = false
 
 export default handler

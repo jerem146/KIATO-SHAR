@@ -45,7 +45,7 @@ handler.help = ['halloween'];
 handler.tags = ['rpg'];
 handler.command = ['halloween'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;
 

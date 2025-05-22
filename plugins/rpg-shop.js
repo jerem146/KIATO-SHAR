@@ -21,6 +21,6 @@ handler.help = ['Buy', 'Buyall'];
 handler.tags = ['economy'];
 handler.command = ['buy', 'buyall'];
 handler.group = true;
-handler.register = true;
+handler.register = false;
 
 export default handler;

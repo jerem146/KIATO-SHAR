@@ -1,6 +1,6 @@
 <h1 align="center">✦ Destiny-Bσƚ ✦</h1>
 
- <img src= "https://files.catbox.moe/ob1psq.jpg">
+ <img src= "https://files.catbox.moe/q7q7k4.jpg">
     </p>
 
 ### **`❕️ Información importante`**

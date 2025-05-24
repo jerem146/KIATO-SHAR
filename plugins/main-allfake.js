@@ -29,7 +29,7 @@ console.log(`Error : ${e}`)
 
 global.creador = '51944171641'
 global.ofcbot = `${conn.user.jid.split('@')[0]}`
-global.asistencia = 'Wa.me/573154062343'
+global.asistencia = 'Wa.me/51944171641'
 global.namechannel = '=͟͟͞❀ Destiny - 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⏤͟͟͞͞★'
 global.namechannel2 = '=͟͟͞❀ Destiny - 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ⏤͟͟͞͞★'
 global.namegrupo = 'ᰔᩚ Destiny • ᥆𝖿іᥴіᥲᥣ ❀'

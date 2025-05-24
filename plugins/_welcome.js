@@ -43,7 +43,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
  ┋❀ Grupo: ${groupMetadata.subject}
  ┋❀ Miembros: ${totalMembers}
  ┗━━━━━━━━━━━━━━━┅ ⳹
->  ${dev}`;
+> > ${global.dev}
       await conn.sendMessage(m.chat, { image: img, caption: bye, mentions: [who] }, { quoted: estilo })
     }
   }

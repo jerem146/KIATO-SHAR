@@ -1,53 +1,50 @@
-import { createHash } from 'crypto'
+import { createHash } from 'crypto' 
 import fetch from 'node-fetch'
 
-const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin }) => {
+const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isROwner }) => {
   let chat = global.db.data.chats[m.chat]
   let user = global.db.data.users[m.sender]
   let bot = global.db.data.settings[conn.user.jid] || {}
   let type = command.toLowerCase()
-  let isAll = false
+  let isAll = false, isUser = false
   let isEnable = chat[type] || false
 
   if (args[0] === 'on' || args[0] === 'enable') {
-    isEnable = true
-  } else if (args[0] === 'off' || args[0] === 'disable') {
+    isEnable = true;
+} else if (args[0] === 'off' || args[0] === 'disable') {
     isEnable = false
-  } else {
+} else {
     const estado = isEnable ? '✓ Activado' : '✗ Desactivado'
-    return conn.reply(m.chat, 
-`╭━━〔 *Configuración: ${type.toUpperCase()}* 〕━━⬣
-┃✦ Para *activar* esta función:
-┃   ➤ ${usedPrefix}${command} on
-┃
-┃✦ Para *desactivarla*:
-┃   ➤ ${usedPrefix}${command} off
-┃
-┃✦ Estado actual: ${estado}
-╰━━━━━━━━━━━━━━━━━━⬣`, m)
-  }
-
-  const checkPermissions = (grupo = false, admin = false) => {
-    if (!m.isGroup && grupo && !isOwner) {
-      global.dfail('group', m, conn)
-      throw false
-    } else if (m.isGroup && admin && !(isAdmin || isOwner)) {
-      global.dfail('admin', m, conn)
-      throw false
-    }
+    return conn.reply(m.chat, `「✦」Un administrador puede activar o desactivar el *${command}* utilizando:\n\n> ✐ *${usedPrefix}${command} on* para activar.\n> ✐ *${usedPrefix}${command} off* para desactivar.\n\n✧ Estado actual » *${estado}*`, m)
   }
 
   switch (type) {
     case 'welcome':
     case 'bienvenida':
-      checkPermissions(true, true)
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
       chat.welcome = isEnable
-      break
+      break  
 
-    case 'antilag':
-      checkPermissions(true, true)
+      case 'antilag':
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
       chat.antiLag = isEnable
-      break
+      break  
 
     case 'antiprivado':
     case 'antiprivate':
@@ -71,49 +68,98 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin })
 
     case 'antibot':
     case 'antibots':
-      checkPermissions(true, true)
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
       chat.antiBot = isEnable
       break
 
     case 'autoaceptar':
     case 'aceptarauto':
-      checkPermissions(true, true)
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
       chat.autoAceptar = isEnable
       break
 
     case 'autorechazar':
     case 'rechazarauto':
-      checkPermissions(true, true)
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
       chat.autoRechazar = isEnable
       break
 
     case 'autoresponder':
     case 'autorespond':
-      checkPermissions(true, true)
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
       chat.autoresponder = isEnable
       break
 
     case 'antisubbots':
     case 'antibot2':
-      checkPermissions(true, true)
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
       chat.antiBot2 = isEnable
       break
 
     case 'modoadmin':
     case 'soloadmin':
-      checkPermissions(true, true)
-      chat.modoadmin = isEnable
-      break
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn);
+          throw false;
+        }
+      }
+      chat.modoadmin = isEnable;
+      break;
 
     case 'reaction':
     case 'reaccion':
-      checkPermissions(true, true)
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
       chat.reaction = isEnable
       break
 
     case 'nsfw':
     case 'modohorny':
-      checkPermissions(true, true)
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
       chat.nsfw = isEnable
       break
 
@@ -129,47 +175,46 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin })
 
     case 'detect':
     case 'alertas':
-      checkPermissions(true, true)
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
       chat.detect = isEnable
       break
 
     case 'antilink':
-      checkPermissions(true, true)
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
       chat.antiLink = isEnable
       break
 
-    case 'antifake':
-      checkPermissions(true, true)
+      case 'antifake':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
       chat.antifake = isEnable
       break
   }
 
-  chat[type] = isEnable
+  chat[type] = isEnable;
 
-  const alcance = isAll ? 'a nivel global del bot' : 'en este grupo'
-  conn.reply(m.chat,
-`╭━━〔 *Cambio aplicado exitosamente* 〕━━⬣
-┃✦ Función: *${type.toUpperCase()}*
-┃✦ Estado: *${isEnable ? 'Activada ✓' : 'Desactivada ✗'}*
-┃✦ Alcance: ${alcance}
-╰━━━━━━━━━━━━━━━━━━⬣`, m)
-}
+  conn.reply(m.chat, `《✦》 *${type}* *${isEnable ? 'activo' : 'desactivado'}* ${isAll ? 'para este Bot' : isUser ? '' : ''}`, m);
+};
 
-handler.help = [
-  'welcome', 'bienvenida', 'antilag', 'antiprivado', 'antiprivate', 'restrict', 'restringir', 
-  'autolevelup', 'autonivel', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 
-  'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'antisubbots', 'antibot2', 
-  'modoadmin', 'soloadmin', 'reaction', 'reaccion', 'nsfw', 'modohorny', 'antispam', 
-  'jadibotmd', 'modejadibot', 'subbots', 'detect', 'alertas', 'antilink', 'antifake'
-]
-
-handler.tags = ['nable']
-handler.command = [
-  'welcome', 'bienvenida', 'antilag', 'antiprivado', 'antiprivate', 'restrict', 'restringir', 
-  'autolevelup', 'autonivel', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 
-  'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'antisubbots', 'antibot2', 
-  'modoadmin', 'soloadmin', 'reaction', 'reaccion', 'nsfw', 'modohorny', 'antispam', 
-  'jadibotmd', 'modejadibot', 'subbots', 'detect', 'alertas', 'antilink', 'antifake'
-]
+handler.help = ['welcome', 'bienvenida', 'antiprivado', 'antiprivate', 'restrict', 'restringir', 'autolevelup', 'autonivel', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'antisubbots', 'antibot2', 'modoadmin', 'soloadmin', 'reaction', 'reaccion', 'nsfw', 'modohorny', 'antispam', 'jadibotmd', 'modejadibot', 'subbots', 'detect', 'avisos', 'antilink']
+handler.tags = ['nable'];
+handler.command = ['welcome', 'bienvenida', 'antilag', 'antiprivado', 'antiprivate', 'restrict', 'restringir', 'autolevelup', 'autonivel', 'antibot', 'antibots', 'autoaceptar', 'aceptarauto', 'autorechazar', 'rechazarauto', 'autoresponder', 'autorespond', 'antisubbots', 'antibot2', 'modoadmin', 'soloadmin', 'reaction', 'reaccion', 'nsfw', 'modohorny', 'antispam', 'jadibotmd', 'modejadibot', 'subbots', 'detect', 'alertas', 'antilink', 'antifake']
 
 export default handler

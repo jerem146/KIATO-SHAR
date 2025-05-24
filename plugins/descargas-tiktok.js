@@ -31,7 +31,7 @@ handler.tags = ['descargas'];
 handler.command = ['tiktok', 'tt'];
 handler.group = true;
 handler.register = false;
-handler.coin = 2;
+handler.coin = 0;
 handler.limit = true;
 
 export default handler;

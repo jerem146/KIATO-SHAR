@@ -1,12 +1,15 @@
 let handler = async (m, { text }) => {
   if (!text?.trim()) {
-    return m.reply('⚠️ Por favor, proporciona un mensaje de bienvenida.\n> Ejemplo: *#setwelcome Hola @user, disfruta tu estadía*');
+    return m.reply('⚠️ Por favor, proporciona un mensaje de bienvenida.\n> Ejemplo: *#setwelcome Hola, disfruta tu estadía en el grupo*');
   }
 
+  // Asegurarse de que la base de datos esté inicializada
   global.db.data.chats[m.chat] = global.db.data.chats[m.chat] || {};
-  global.db.data.chats[m.chat].welcome = text.trim();
 
-  m.reply(`✅ La bienvenida ha sido establecida para este grupo:\n\n"${text.trim()}"`);
+  // Guardar el mensaje en 'welcomeMessage', que es lo que usas en tu función de bienvenida
+  global.db.data.chats[m.chat].welcomeMessage = text.trim();
+
+  m.reply(`✅ Mensaje de bienvenida actualizado:\n\n"${text.trim()}"`);
 };
 
 handler.help = ['setwelcome <texto>'];

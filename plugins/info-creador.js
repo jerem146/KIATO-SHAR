@@ -1,19 +1,57 @@
 import PhoneNumber from 'awesome-phonenumber';
 
-let handler = async (m, { conn }) => {
-  m.react('🌟');
-  let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
-  let pp = await conn.profilePictureUrl(who).catch(_ => 'https://files.catbox.moe/qpaso7.jpg');
-  let biografia = await conn.fetchStatus(`${suittag}@s.whatsapp.net`).catch(_ => 'Sin Biografía');
-  let biografiaBot = await conn.fetchStatus(`${conn.user.jid.split('@')[0]}@s.whatsapp.net`).catch(_ => 'Sin Biografía');
-  let bio = biografia.status?.toString() || 'Sin Biografía';
-  let biobot = biografiaBot.status?.toString() || 'Sin Biografía';
-  let name = await conn.getName(who);
+// ---------------------------------------------------------------------------------//
+//         CONFIGURA ESTAS VARIABLES CON TU INFORMACIÓN REAL                       //
+// ---------------------------------------------------------------------------------//
+const ownerNumber = '5216631079388'; // Número del propietario SIN el '+' o '@s.whatsapp.net'.
+// ---------------------------------------------------------------------------------//
 
-  await sendContactArray(conn, m.chat, [
-    [`${suittag}`, `ᰔᩚ Propietario`, botname, `❀ No Hacer Spam`, correo, `⊹˚• Colombia •˚⊹`, md, bio],
-    [`${conn.user.jid.split('@')[0]}`, `✦ Es Un Bot`, packname, dev, correo, `Donde las albinas🔥`, channel, biobot]
-  ], m);
+
+let handler = async (m, { conn }) => {
+  m.react('🩵');
+
+  const ownerJid = `${ownerNumber}@s.whatsapp.net`;
+  let botJid = conn.user.jid; 
+
+  if (!botJid || !botJid.includes('@')) {
+    console.error("Error: botJid no está disponible o es inválido:", botJid);
+    // botJid = "0@s.whatsapp.net"; // Placeholder si es necesario
+  }
+  
+  let currentOwnerName = 'Propietario'; // Nombre por defecto si no se puede obtener de WhatsApp
+  try {
+    const fetchedName = await conn.getName(ownerJid);
+    if (fetchedName) {
+        currentOwnerName = fetchedName; // Usar el nombre obtenido de WhatsApp
+    }
+  } catch (getNameError) {
+    console.warn(`No se pudo obtener el nombre para ${ownerJid}. Usando nombre por defecto: "${currentOwnerName}". Error: ${getNameError.message}`);
+  }
+
+  const contactData = [
+    [
+      ownerNumber,                          
+      `ᰔᩚ Propietario`, // Mostrará el nombre obtenido o "Propietario"
+      '❀ No Hacer Spam'                     
+    ]
+  ];
+
+  const botNumber = botJid ? botJid.split('@')[0] : null;
+  if (botNumber && botNumber !== "0") { 
+    contactData.push([
+      botNumber,                            
+      '✦ Bot Asistente',                    
+      '✨ Asistente Virtual ✨'              
+    ]);
+  } else {
+    console.warn("No se pudo obtener el número del bot, no se añadirá su contacto.");
+  }
+
+  if (contactData.length > 0) {
+    await sendContactArray(conn, m.chat, contactData, m);
+  } else {
+    m.reply("No se pudieron preparar los datos de contacto.");
+  }
 }
 
 handler.help = ["creador", "owner"];
@@ -24,33 +62,55 @@ export default handler;
 
 async function sendContactArray(conn, jid, data, quoted, options) {
   if (!Array.isArray(data[0]) && typeof data[0] === 'string') data = [data];
+  
   let contacts = [];
-  for (let [number, name, isi, isi1, isi2, isi3, isi4, isi5] of data) {
-    number = number.replace(/[^0-9]/g, '');
-    let njid = number + '@s.whatsapp.net';
+  
+  for (let [numberInput, displayName, organization] of data) {
+    const cleanedNumber = String(numberInput || '').replace(/[^0-9]/g, '');
+    
+    if (!cleanedNumber) {
+      console.warn(`Número vacío o inválido proporcionado para '${displayName}'. Saltando este contacto.`);
+      continue;
+    }
+
+    let waid = cleanedNumber; 
+    let formattedPhoneNumber;
+
+    try {
+      const pnInstance = new PhoneNumber('+' + cleanedNumber); 
+      
+      if (pnInstance.isValid()) {
+        formattedPhoneNumber = pnInstance.getNumber('international');
+      } else {
+        formattedPhoneNumber = '+' + cleanedNumber;
+        console.warn(`[!] El número +${cleanedNumber} (para ${displayName}) no es considerado válido por awesome-phonenumber. Usando fallback: ${formattedPhoneNumber}`);
+      }
+    } catch (e) {
+      console.error(`[!] Error al formatear el número de teléfono '+${cleanedNumber}' (para ${displayName}):`, e.message);
+      formattedPhoneNumber = '+' + cleanedNumber; 
+    }
+
     let vcard = `
 BEGIN:VCARD
 VERSION:3.0
-N:;${name.replace(/\n/g, '\\n')};;;
-FN:${name.replace(/\n/g, '\\n')}
-item.ORG:${isi}
-item1.TEL;waid=${number}:${PhoneNumber('+' + number).getNumber('international')}
-item1.X-ABLabel:${isi1}
-item2.EMAIL;type=INTERNET:${isi2}
-item2.X-ABLabel:Email
-item3.ADR:;;${isi3};;;;
-item3.X-ABADR:ac
-item3.X-ABLabel:Region
-item4.URL:${isi4}
-item4.X-ABLabel:Website
-item5.X-ABLabel:${isi5}
+N:;${displayName.replace(/\n/g, '\\n')};;;
+FN:${displayName.replace(/\n/g, '\\n')}
+ORG:${(organization || '').replace(/\n/g, '\\n')}
+TEL;type=CELL;type=VOICE;waid=${waid}:${formattedPhoneNumber || ('+' + waid)}
 END:VCARD`.trim();
-    contacts.push({ vcard, displayName: name });
+
+    contacts.push({ vcard, displayName: displayName });
   }
+
+  if (contacts.length === 0) {
+    console.warn("No se generaron contactos válidos para enviar.");
+    return;
+  }
+
   return await conn.sendMessage(jid, {
     contacts: {
-      displayName: (contacts.length > 1 ? `Contactos` : contacts[0].displayName) || null,
-      contacts,
+      displayName: (contacts.length > 1 ? `👥 Contactos Clave (${contacts.length})` : contacts[0]?.displayName) || "Contacto",
+      contacts, 
     }
   }, {
     quoted,

@@ -10,7 +10,7 @@ let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
 
 ᰔᩚ https_(S2)
 > 🜸 Rol » *Creador*
-> ✧ GitHub » https://github.com/https0J 
+> ✧ GitHub » https://github.com/jerem146 
 
 ❒ *Colaboradores:*
 

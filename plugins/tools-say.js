@@ -14,5 +14,5 @@ let handler = async (m, { conn, args }) => {
 };
 handler.command = ['say', 'decir']
 handler.tag = ['tools'];
-handler.group = true;
+handler.group = false;
 export default handler;

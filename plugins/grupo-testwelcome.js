@@ -1,14 +1,11 @@
-import { WAMessageStubType } from '@whiskeysockets/baileys';
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text }) => {
-  if (!db.data.chats[m.chat]?.welcome && m.isGroup) {
+  if (!global.db.data.chats[m.chat]?.welcome && m.isGroup) {
     return m.reply(`${emoji} Para usar este comando debes activar las bienvenidas con *#welcome*`);
   }
 
-  if (!text) {
-    return m.reply(`${emoji} Menciona al usuario con @ para simular la bienvenida.`);
-  }
+  if (!text) return m.reply(`${emoji} Menciona al usuario con @ para simular la bienvenida.`);
 
   let who = conn.parseMention(text.trim())[0];
   if (!who) return m.reply(`${emoji} No se pudo obtener el usuario mencionado.`);
@@ -17,6 +14,7 @@ let handler = async (m, { conn, text }) => {
   let groupMetadata = await conn.groupMetadata(m.chat);
   let chat = global.db.data.chats[m.chat] || {};
   let welcomeMessage = chat.welcomeMessage || 'Bienvenido/a :';
+  let totalMembers = groupMetadata.participants.length;
   let defaultImage = 'https://files.catbox.moe/npchez.jpg';
 
   let img;
@@ -31,7 +29,8 @@ let handler = async (m, { conn, text }) => {
 ┋「 Bienvenido 」
 ┗╼★ 「 ${taguser} 」
  ┋❖ ${welcomeMessage}
- ┋❀  ${groupMetadata.subject}
+ ┋❀ Grupo: ${groupMetadata.subject}
+ ┋❀ Miembros: ${totalMembers}
  ┗━━━━━━━━━━━━━━━┅ ⳹
 > ✐ Puedes usar *#profile* para ver tu perfil.`;
 

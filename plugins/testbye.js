@@ -1,14 +1,11 @@
-import { WAMessageStubType } from '@whiskeysockets/baileys';
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text }) => {
-  if (!db.data.chats[m.chat]?.welcome && m.isGroup) {
+  if (!global.db.data.chats[m.chat]?.welcome && m.isGroup) {
     return m.reply(`${emoji} Para usar este comando debes activar las bienvenidas con *#welcome*`);
   }
 
-  if (!text) {
-    return m.reply(`${emoji} Menciona al usuario con @ para simular la despedida.`);
-  }
+  if (!text) return m.reply(`${emoji} Menciona al usuario con @ para simular la despedida.`);
 
   let who = conn.parseMention(text.trim())[0];
   if (!who) return m.reply(`${emoji} No se pudo obtener el usuario mencionado.`);
@@ -16,8 +13,9 @@ let handler = async (m, { conn, text }) => {
   let taguser = `@${who.split('@')[0]}`;
   let groupMetadata = await conn.groupMetadata(m.chat);
   let chat = global.db.data.chats[m.chat] || {};
-  let despMessage = chat.despMessage || 'Se fue 😿';
-  let defaultImage = 'https://files.catbox.moe/npchez.jpg';
+  let byeMessage = chat.despMessage || 'Se Fue😹';
+  let totalMembers = groupMetadata.participants.length;
+  let defaultImage = 'https://files.catbox.moe/xr2m6u.jpg';
 
   let img;
   try {
@@ -30,10 +28,11 @@ let handler = async (m, { conn, text }) => {
   let texto = `┏╼★${textbot}
 ┋「 ADIÓS 👋 」
 ┗╼★ 「 ${taguser} 」
- ┋❖ ${despMessage}
- ┋❀  ${groupMetadata.subject}
+ ┋❖ ${byeMessage}
+ ┋❀ Grupo: ${groupMetadata.subject}
+ ┋❀ Miembros: ${totalMembers}
  ┗━━━━━━━━━━━━━━━┅ ⳹
-> ✐ Te extrañaremos.`;
+> © ⍴᥆ᥕᥱrᥱძ ᑲᥡ ᗪ卂尺Ҝ`;
 
   await conn.sendMessage(m.chat, { image: img, caption: texto, mentions: [who] }, { quoted: m });
 };

@@ -14,6 +14,6 @@ handler.tags = ['grupo']
 handler.command = ['del','delete']
 handler.group = false
 handler.admin = true
-handler.botAdmin = true
+
 
 export default handler

@@ -1,13 +1,9 @@
 let handler = async (m) => {
-    let muptime = clockString(process.uptime() * 1000) // Convierte a milisegundos
-    let diseño = `⟡ ｡ﾟﾟ･｡･ﾟﾟ｡  
-  ﾟ✧  *TIEMPO ACTIVA*  ✧ﾟ  
-  ﾟﾟ･｡･ﾟ    
-╭───────────────✦  
-│ 🤍 *Duración:* ${muptime}  
-╰───────────────✦  
-ꔫ ｡ﾟﾟ･｡･ﾟﾟ｡  ﾟ✧`
-    
+    let muptime = clockString(process.uptime() * 1000)
+    let nombreBot = "𝐊𝐈𝐀𝐓𝐎-𝐁𝐎𝐓"
+
+    let diseño = `🌟 *Tiempo Activo ${nombreBot}:* ${muptime}`
+
     m.reply(diseño)
 }
 

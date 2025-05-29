@@ -46,7 +46,7 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, us
   const groupInfo = await conn.groupMetadata(m.chat);
   const groupName = groupInfo.subject;
 
-  let texto = `*『 ${botName} 』*\n${mensaje}\n╭─〔𝙈𝙄𝙀𝙈𝘽𝙍𝙊𝙎 de ${groupName} 〕─⬣\n`;
+  let texto = `*『 ${botName} 』*\n${mensaje}\n╭─〔𝙈𝙄𝙀𝙈𝘽𝙍𝙊𝙎 de *${groupName}* 〕─⬣\n`;
 
   for (const mem of participants) {
     const num = mem.id.split('@')[0];

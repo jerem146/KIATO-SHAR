@@ -61,6 +61,6 @@ handler.tags = ["descargas"];
 handler.command = ["npmdownloader", "npmdownload", "npmpkgdownloader", "npmpkgdownload", "npmdl", "npmd"];
 handler.group = false;
 handler.register = false;
-handler.coin = 5;
+handler.coin = 0;
 
 export default handler;

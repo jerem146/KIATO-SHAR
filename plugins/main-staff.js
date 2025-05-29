@@ -1,14 +1,14 @@
 let handler = async (m, { conn, command, usedPrefix }) => {
 let img = './src/catalogo.jpg'
 let staff = `ᥫ᭡ *EQUIPO DE AYUDANTES* ❀
-✰ *Dueño* ${51944171641}
+✰ *Dueño* ${Creador}
 ✦ *Bot:* ${botname}
 ⚘ *Versión:* ${vs}
 ❖ *Libreria:* ${libreria} ${baileys}
 
 ❍ *Creador:*
 
-ᰔᩚ https_(S2)
+ᰔᩚ DAREK
 > 🜸 Rol » *Creador*
 > ✧ GitHub » https://github.com/jerem146 
 

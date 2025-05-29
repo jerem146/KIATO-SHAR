@@ -47,7 +47,7 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
   const mensaje = args.length > 0 ? args.join` ` : '*Revivaaaaan 🗣️*';
   const botName = typeof botname !== 'undefined' ? botname : 'KIATO-BOT';
 
-  let texto = `*『 ${botName} 』*${mensaje}\n╭─〔 𝙈𝙄𝙀𝙈𝘽𝙍𝙊𝙎: ${participants.length} 〕─⬣\n`;
+  let texto = `*『 ${botName} 』\n*${mensaje}\n╭─〔 𝙈𝙄𝙀𝙈𝘽𝙍𝙊𝙎: ${participants.length} 〕─⬣\n`;
 
   for (const mem of participants) {
     const num = mem.id.split('@')[0];

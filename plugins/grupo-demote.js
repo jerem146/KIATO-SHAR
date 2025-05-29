@@ -34,4 +34,4 @@ handler.admin = true
 handler.botAdmin = true
 handler.fail = null
 
-export default handlerr
+export default handler

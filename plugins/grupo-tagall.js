@@ -1,9 +1,4 @@
-/* 
-- tagall By Angel-OFC  
-- etiqueta en un grupo a todos con banderas 🇺🇸
-- Modificado para KIATO-BOT: mensaje por defecto "Revivaaaaan 🗣️"
-*/
-const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, command, usedPrefix }) => {
+const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, usedPrefix, command }) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
 
   const customEmoji = global.db.data.chats[m.chat]?.customEmoji || '🍫';
@@ -14,7 +9,7 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
     throw false;
   }
 
-  // Función para obtener la bandera según el prefijo telefónico
+  // Función para obtener bandera desde número
   function getFlagFromNumber(number) {
     const countryFlags = {
       '1': '🇺🇸', '7': '🇷🇺', '20': '🇪🇬', '27': '🇿🇦', '30': '🇬🇷',
@@ -41,18 +36,22 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
       const code = number.slice(0, len);
       if (countryFlags[code]) return countryFlags[code];
     }
-    return '🏳️';
+    return '🏳️'; // Bandera blanca si no hay coincidencia
   }
 
   const mensaje = args.length > 0 ? args.join` ` : '*Revivaaaaan 🗣️*';
   const botName = typeof botname !== 'undefined' ? botname : 'KIATO-BOT';
 
-  let texto = `*『 ${botName} 』\n*${mensaje}\n╭─〔 𝙈𝙄𝙀𝙈𝘽𝙍𝙊𝙎: ${participants.length} 〕─⬣\n`;
+  // Obtener el nombre del grupo
+  const groupInfo = await conn.groupMetadata(m.chat);
+  const groupName = groupInfo.subject;
+
+  let texto = `*『 ${botName} 』*\n\n${mensaje}\n\n╭─〔 ${groupName} 〕─⬣\n`;
 
   for (const mem of participants) {
     const num = mem.id.split('@')[0];
     const flag = getFlagFromNumber(num);
-    texto += `┃ ${flag} @${num}\n`;
+    texto += `┃ ${flag}@${num}\n`; // sin espacio
   }
 
   texto += `╰─❍ *Versión: ${vs}*`;

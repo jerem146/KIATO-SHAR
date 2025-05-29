@@ -22,16 +22,16 @@ var user = number + '@s.whatsapp.net'
 } catch (e) {
 } finally {
 conn.groupParticipantsUpdate(m.chat, [user], 'demote')
-conn.reply(m.chat, `${emoji2}.`, m)
+conn.reply(m.chat, `${emoji2} Fue descartado como admin.`, m)
 }
 
 }
 handler.help = ['demote']
 handler.tags = ['grupo']
-handler.command = ['demote','quitarpene', 'degradar']
+handler.command = ['demote','quitarpija', 'degradar']
 handler.group = true
 handler.admin = true
 handler.botAdmin = true
 handler.fail = null
 
-export default handler
+export default handlerr

@@ -44,6 +44,6 @@ handler.tags = ['descargas']
 handler.command = ['facebook', 'fb']
 handler.group = true;
 handler.register = false;
-handler.coin = 2;
+handler.coin = 0;
 
 export default handler
